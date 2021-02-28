@@ -1,0 +1,29 @@
+name: Build and Deploy
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout 🛎️
+        uses: actions/checkout@v2
+
+      - name: Build
+        run: |
+          curl -sL https://github.com/rust-lang/mdBook/releases/download/v0.4.7/mdbook-v0.4.7-x86_64-unknown-linux-gnu.tar.gz | tar xzv
+          curl -sL https://github.com/badboy/mdbook-open-on-gh/releases/download/2.0.0/mdbook-open-on-gh-2.0.0-x86_64-unknown-linux-gnu.tar.gz | tar zxv
+
+          export PATH=$PATH:$(pwd)
+
+          mdbook build
+
+          ls -lh book
+
+      - name: Deploy 🚀
+        uses: JamesIves/github-pages-deploy-action@4.0.0
+        with:
+          branch: gh-pages
+          folder: book
