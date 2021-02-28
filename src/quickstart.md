@@ -9,6 +9,15 @@ roapi-http \
     --table 'spacex_launches:test_data/spacex-launches.json'
 ```
 
+Or using prebuilt docker image:
+
+```
+docker run -t --rm -p 8080:8080 ghcr.io/roapi/roapi-http:latest --addr 0.0.0.0:8080 \
+    --table 'uk_cities:test_data/uk_cities_with_headers.csv' \
+    --table 'spacex_launches:test_data/spacex-launches.json'
+```
+
+
 ## Query API
 
 Query tables using SQL, GraphQL or REST:

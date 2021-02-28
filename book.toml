@@ -10,5 +10,6 @@ git-repository-url = "https://github.com/roapi/docs"
 additional-css = ["open-in-gh.css"]
 
 [preprocessor.open-on-gh]
-command = "mdbook-open-on-gh"
+# command = "mdbook-open-on-gh"
+command = "/home/houqp/Documents/code/test/mdbook-open-on-gh/target/debug/mdbook-open-on-gh"
 renderer = ["html"]
