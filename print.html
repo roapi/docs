@@ -189,12 +189,21 @@ various formats requested by client.</li>
 <p>See below for a high level diagram:</p>
 <img alt="roapi-design-diagram" src="./images/roapi.svg">
 <h1 id="installation"><a class="header" href="#installation">Installation</a></h1>
+<h2 id="build-from-source"><a class="header" href="#build-from-source">Build from source</a></h2>
+<p>You need to install <a href="https://rustup.rs/">Rust toolchain</a> if you haven't done so.</p>
 <pre><code class="language-bash">cargo install --git https://github.com/roapi/roapi --branch main --bin roapi-http
 </code></pre>
-<footer id="open-on-gh">Found a bug? <a href="https://github.com/roapi/docs/edit/main/src/installation.md">Edit this file on GitHub.</a></footer><h1 id="quick-start"><a class="header" href="#quick-start">Quick start</a></h1>
+<h2 id="docker"><a class="header" href="#docker">Docker</a></h2>
+<p>A prebuilt docker image is also available at <a href="https://github.com/orgs/roapi/packages/container/package/roapi-http">ghcr.io/roapi/roapi-http</a>.</p>
+<h1 id="quick-start"><a class="header" href="#quick-start">Quick start</a></h1>
 <p>Spin up APIs for <code>test_data/uk_cities_with_headers.csv</code> and
 <code>test_data/spacex-launches.json</code>:</p>
 <pre><code class="language-bash">roapi-http \
+    --table 'uk_cities:test_data/uk_cities_with_headers.csv' \
+    --table 'spacex_launches:test_data/spacex-launches.json'
+</code></pre>
+<p>Or using prebuilt docker image:</p>
+<pre><code>docker run -t --rm -p 8080:8080 ghcr.io/roapi/roapi-http:latest --addr 0.0.0.0:8080 \
     --table 'uk_cities:test_data/uk_cities_with_headers.csv' \
     --table 'spacex_launches:test_data/spacex-launches.json'
 </code></pre>
@@ -253,10 +262,10 @@ by each frontend.</p>
   }
 }
 </code></pre>
-<footer id="open-on-gh">Found a bug? <a href="https://github.com/roapi/docs/edit/main/src/quickstart.md">Edit this file on GitHub.</a></footer><h1 id="config"><a class="header" href="#config">Config</a></h1>
+<h1 id="config"><a class="header" href="#config">Config</a></h1>
 <h1 id="command-line-argument"><a class="header" href="#command-line-argument">Command line argument</a></h1>
 <p>You can configure ROAPI to load as many tables as you want by repeating the <code>--table</code> argument.</p>
-<footer id="open-on-gh">Found a bug? <a href="https://github.com/roapi/docs/edit/main/src/config/cli.md">Edit this file on GitHub.</a></footer><h1 id="yaml-config"><a class="header" href="#yaml-config">YAML config</a></h1>
+<h1 id="yaml-config"><a class="header" href="#yaml-config">YAML config</a></h1>
 <p>You can configure multiple table sources using YAML config, which supports more
 advanced format specific table options. For example:</p>
 <pre><code class="language-yaml">addr: 0.0.0.0:8084
@@ -300,7 +309,7 @@ tables:
 <p>To run serve tables using config file:</p>
 <pre><code class="language-bash">roapi-http -c ./roapi.yml
 </code></pre>
-<footer id="open-on-gh">Found a bug? <a href="https://github.com/roapi/docs/edit/main/src/config/config-file.md">Edit this file on GitHub.</a></footer><h1 id="dataset-formats"><a class="header" href="#dataset-formats">Dataset formats</a></h1>
+<h1 id="dataset-formats"><a class="header" href="#dataset-formats">Dataset formats</a></h1>
 <h1 id="json"><a class="header" href="#json">JSON</a></h1>
 <p>When a table uri ends in <code>.json</code>, ROAPI will try to load it as JSON table if no
 <code>format</code> option is specified:</p>
@@ -359,7 +368,7 @@ perform the schema inference:</p>
         - name: &quot;col2&quot;
           data_type: &quot;Utf8&quot;
 </code></pre>
-<footer id="open-on-gh">Found a bug? <a href="https://github.com/roapi/docs/edit/main/src/config/dataset-formats/json.md">Edit this file on GitHub.</a></footer><h1 id="parquet"><a class="header" href="#parquet">Parquet</a></h1>
+<h1 id="parquet"><a class="header" href="#parquet">Parquet</a></h1>
 <p>When a table uri ends in <code>.parquet</code>, ROAPI will try to load it as Parquet table if no
 <code>format</code> option is specified:</p>
 <pre><code class="language-yaml">tables:
@@ -374,7 +383,7 @@ into a single table by directory path:</p>
     option:
       format: &quot;parquet&quot;
 </code></pre>
-<footer id="open-on-gh">Found a bug? <a href="https://github.com/roapi/docs/edit/main/src/config/dataset-formats/parquet.md">Edit this file on GitHub.</a></footer><h1 id="csv"><a class="header" href="#csv">CSV</a></h1>
+<h1 id="csv"><a class="header" href="#csv">CSV</a></h1>
 <p>When a table uri ends in <code>.csv</code>, ROAPI will try to load it as CSV table if no
 <code>format</code> option is specified:</p>
 <pre><code class="language-yaml">tables:
@@ -389,7 +398,7 @@ into a single table by directory path:</p>
     option:
       format: &quot;csv&quot;
 </code></pre>
-<footer id="open-on-gh">Found a bug? <a href="https://github.com/roapi/docs/edit/main/src/config/dataset-formats/csv.md">Edit this file on GitHub.</a></footer><h1 id="google-spreadsheet"><a class="header" href="#google-spreadsheet">Google spreadsheet</a></h1>
+<h1 id="google-spreadsheet"><a class="header" href="#google-spreadsheet">Google spreadsheet</a></h1>
 <p>To serve a Google spreadsheet as API, you need to gather the following config values:</p>
 <ul>
 <li>Google spreadsheet URL</li>
@@ -414,7 +423,7 @@ account through service account email).</li>
       application_secret_path: &quot;path/to/service_account_key.json&quot;
       sheet_title: &quot;sheet_name_within_google_spreadsheet&quot;
 </code></pre>
-<footer id="open-on-gh">Found a bug? <a href="https://github.com/roapi/docs/edit/main/src/config/dataset-formats/gsheet.md">Edit this file on GitHub.</a></footer><h1 id="blob-store"><a class="header" href="#blob-store">Blob store</a></h1>
+<h1 id="blob-store"><a class="header" href="#blob-store">Blob store</a></h1>
 <p>ROAPI currently supports the following blob storages:</p>
 <ul>
 <li>Filesystem</li>
@@ -432,7 +441,7 @@ by setting uri to the directory path.</p>
 <p>ROAPI can build tables from datasets served through HTTP protocols. However, one
 thing to keep in mind is HTTP store doesn't support partitioned datasets because
 there is no native directory support in HTTP.</p>
-<footer id="open-on-gh">Found a bug? <a href="https://github.com/roapi/docs/edit/main/src/config/blob-store.md">Edit this file on GitHub.</a></footer><h1 id="api"><a class="header" href="#api">API</a></h1>
+<h1 id="api"><a class="header" href="#api">API</a></h1>
 <h1 id="query-frontends"><a class="header" href="#query-frontends">Query frontends</a></h1>
 <h1 id="sql"><a class="header" href="#sql">SQL</a></h1>
 <p>To query tables using a subset of standard SQL, send the query payload through
@@ -441,7 +450,7 @@ supports table joins.</p>
 <p>SQL query frontend is the more flexible and powerful compared to
 <a href="api/query/rest.html">REST</a> and <a href="api/query/graphql.html">GraphQL</a>. It is the only query frontend
 that supports table joins.</p>
-<footer id="open-on-gh">Found a bug? <a href="https://github.com/roapi/docs/edit/main/src/api/query/sql.md">Edit this file on GitHub.</a></footer><h1 id="rest"><a class="header" href="#rest">REST</a></h1>
+<h1 id="rest"><a class="header" href="#rest">REST</a></h1>
 <p>Query tables through REST API by sending <code>GET</code> requests to
 <code>/api/tables/{table_name}</code>. Query operators are specified as query params.</p>
 <p>REST API currently supports the following query operators:</p>
@@ -457,7 +466,7 @@ query param to: <code>sort=col1,-col2</code>.</p>
 <code>filter[col1]='foo'</code>. You can also do basic comparisons with filters, for
 example predicate <code>0 &lt;= col2 &lt; 5</code> can be expressed as
 <code>filter[col2]gte=0&amp;filter[col2]lt=5</code>.</p>
-<footer id="open-on-gh">Found a bug? <a href="https://github.com/roapi/docs/edit/main/src/api/query/rest.md">Edit this file on GitHub.</a></footer><h1 id="graphql"><a class="header" href="#graphql">GraphQL</a></h1>
+<h1 id="graphql"><a class="header" href="#graphql">GraphQL</a></h1>
 <p>To query tables through GraphQL, send the query through <code>POST</code> request to
 <code>/api/graphql</code> endpoint.</p>
 <p>GraphQL query interface supports the same set of operators supported by REST
@@ -480,9 +489,9 @@ API. Here how you can apply various operators to your query:</p>
     }
 }
 </code></pre>
-<footer id="open-on-gh">Found a bug? <a href="https://github.com/roapi/docs/edit/main/src/api/query/graphql.md">Edit this file on GitHub.</a></footer><h1 id="schema"><a class="header" href="#schema">Schema</a></h1>
+<h1 id="schema"><a class="header" href="#schema">Schema</a></h1>
 <p>TODO</p>
-<footer id="open-on-gh">Found a bug? <a href="https://github.com/roapi/docs/edit/main/src/api/schema.md">Edit this file on GitHub.</a></footer><h1 id="response-serialization"><a class="header" href="#response-serialization">Response serialization</a></h1>
+<h1 id="response-serialization"><a class="header" href="#response-serialization">Response serialization</a></h1>
 <p>By default, ROAPI encodes responses in JSON format, but you can request
 different encodings by specifying the <code>ACCEPT</code> header:</p>
 <pre><code class="language-bash">curl -X POST \
@@ -490,7 +499,7 @@ different encodings by specifying the <code>ACCEPT</code> header:</p>
     -d &quot;SELECT launch_library_id FROM spacex_launches WHERE launch_library_id IS NOT NULL&quot; \
     localhost:8080/api/sql
 </code></pre>
-<footer id="open-on-gh">Found a bug? <a href="https://github.com/roapi/docs/edit/main/src/api/response.md">Edit this file on GitHub.</a></footer>
+
                     </main>
 
                     <nav class="nav-wrapper" aria-label="Page navigation">

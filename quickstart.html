@@ -176,6 +176,11 @@
     --table 'uk_cities:test_data/uk_cities_with_headers.csv' \
     --table 'spacex_launches:test_data/spacex-launches.json'
 </code></pre>
+<p>Or using prebuilt docker image:</p>
+<pre><code>docker run -t --rm -p 8080:8080 ghcr.io/roapi/roapi-http:latest --addr 0.0.0.0:8080 \
+    --table 'uk_cities:test_data/uk_cities_with_headers.csv' \
+    --table 'spacex_launches:test_data/spacex-launches.json'
+</code></pre>
 <h2 id="query-api"><a class="header" href="#query-api">Query API</a></h2>
 <p>Query tables using SQL, GraphQL or REST:</p>
 <pre><code class="language-bash">curl -X POST -d &quot;SELECT city, lat, lng FROM uk_cities LIMIT 2&quot; localhost:8080/api/sql
@@ -231,7 +236,7 @@ by each frontend.</p>
   }
 }
 </code></pre>
-<footer id="open-on-gh">Found a bug? <a href="https://github.com/roapi/docs/edit/main/src/quickstart.md">Edit this file on GitHub.</a></footer>
+
                     </main>
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
