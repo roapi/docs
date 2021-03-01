@@ -54,11 +54,15 @@ $ roapi-http -c local.yaml
 Query with aggregation ([SQL frontend](../../api/query/sql.html)):
 
 ```
-$ curl -s -X POST -d "SELECT DISTINCT(Landlord), COUNT(Address) FROM properties GROUP BY Landlord" localhost:8080/api/sql | jq
+$ curl -s -X POST localhost:8080/api/sql --data-binary @- <<EOF | jq
+SELECT DISTINCT(Landlord), COUNT(Address)
+FROM properties
+GROUP BY Landlord
+EOF
 
 [
   {
-    "Landlord": "Daniel",
+    "Landlord": "Roger",
     "COUNT(Address)": 3
   },
   {
@@ -66,7 +70,7 @@ $ curl -s -X POST -d "SELECT DISTINCT(Landlord), COUNT(Address) FROM properties 
     "COUNT(Address)": 4
   },
   {
-    "Landlord": "Roger",
+    "Landlord": "Daniel",
     "COUNT(Address)": 3
   },
   {
@@ -83,7 +87,7 @@ $ curl -s -X POST -d "SELECT DISTINCT(Landlord), COUNT(Address) FROM properties 
 Query with filter ([GraphQL frontend](../../api/query/graphql.html)):
 
 ```
-$ curl -s -X POST localhost:8080/api/graphql -d @- <<EOF | jq
+$ curl -s -X POST localhost:8080/api/graphql --data-binary @- <<EOF | jq
 query {
   properties(
     filter: {
