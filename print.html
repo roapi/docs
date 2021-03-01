@@ -439,7 +439,7 @@ with ROAPI.</p>
 [2021-03-01T00:08:04Z INFO  actix_server::builder] Starting 8 workers
 [2021-03-01T00:08:04Z INFO  actix_server::builder] Starting &quot;actix-web-service-127.0.0.1:8080&quot; service on 127.0.0.1:8080
 </code></pre>
-<p>Query with aggregation (<a href="config/dataset-formats/../../api/query/sql.html">SQL frontend</a>):</p>
+<p>Query with aggregation using <a href="config/dataset-formats/../../api/query/sql.html">SQL frontend</a>:</p>
 <pre><code>$ curl -s -X POST localhost:8080/api/sql --data-binary @- &lt;&lt;EOF | jq
 SELECT DISTINCT(Landlord), COUNT(Address)
 FROM properties
@@ -469,7 +469,7 @@ EOF
   }
 ]
 </code></pre>
-<p>Query with filter (<a href="config/dataset-formats/../../api/query/graphql.html">GraphQL frontend</a>):</p>
+<p>Query with filter using <a href="config/dataset-formats/../../api/query/graphql.html">GraphQL frontend</a>:</p>
 <pre><code>$ curl -s -X POST localhost:8080/api/graphql --data-binary @- &lt;&lt;EOF | jq
 query {
   properties(
