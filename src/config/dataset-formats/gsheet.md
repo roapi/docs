@@ -51,7 +51,7 @@ $ roapi-http -c local.yaml
 [2021-03-01T00:08:04Z INFO  actix_server::builder] Starting "actix-web-service-127.0.0.1:8080" service on 127.0.0.1:8080
 ```
 
-Query with aggregation ([SQL frontend](../../api/query/sql.html)):
+Query with aggregation using [SQL frontend](../../api/query/sql.html):
 
 ```
 $ curl -s -X POST localhost:8080/api/sql --data-binary @- <<EOF | jq
@@ -84,7 +84,7 @@ EOF
 ]
 ```
 
-Query with filter ([GraphQL frontend](../../api/query/graphql.html)):
+Query with filter using [GraphQL frontend](../../api/query/graphql.html):
 
 ```
 $ curl -s -X POST localhost:8080/api/graphql --data-binary @- <<EOF | jq
