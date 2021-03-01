@@ -182,10 +182,10 @@ This is required if <code>SHEET_ID</code> is not specified in URL through <code>
 <li><a href="https://console.developers.google.com/apis/library/sheets.googleapis.com">Activate Google Sheets API</a> in the Google API Console.</li>
 <li>Create a service account: <a href="https://console.developers.google.com/apis/api/sheets.googleapis.com/credentials">https://console.developers.google.com/apis/api/sheets.googleapis.com/credentials</a>.</li>
 <li>Go into service account setting, click <code>ADD KEY</code> -&gt; <code>Create new key</code>. Then select JSON format
-and save it somewhere safe as a file. <img src="/images/gsheet-add-key.png" alt="gsheet-add-key" /></li>
-<li>Copy email address for your newly created service account, usually in the format of <code>{ACCOUNT_NAME}@{PROJECT_ID}.iam.gserviceaccount.com</code>. <img src="/images/gsheet-service-account-email.png" alt="gsheet-service-account-email" /></li>
+and save it somewhere safe as a file. <img src="../../images/gsheet-add-key.png" alt="gsheet-add-key" /></li>
+<li>Copy email address for your newly created service account, usually in the format of <code>{ACCOUNT_NAME}@{PROJECT_ID}.iam.gserviceaccount.com</code>. <img src="../../images/gsheet-service-account-email.png" alt="gsheet-service-account-email" /></li>
 <li>Open the Google spreadsheet that you want to serve, then share it with the newly created service
-account using the service account email. <img src="/images/gsheet-share-service-account.png" alt="gsheet-share-service-account" /></li>
+account using the service account email. <img src="../../images/gsheet-share-service-account.png" alt="gsheet-share-service-account" /></li>
 </ol>
 <p>Now you can configure ROAPI to load the google spreadsheet into a table using:</p>
 <pre><code class="language-yaml">tables:
@@ -210,7 +210,7 @@ with ROAPI.</p>
 [2021-03-01T00:08:04Z INFO  actix_server::builder] Starting 8 workers
 [2021-03-01T00:08:04Z INFO  actix_server::builder] Starting &quot;actix-web-service-127.0.0.1:8080&quot; service on 127.0.0.1:8080
 </code></pre>
-<p>Query with aggregation (<a href="/api/query/sql.html">SQL frontend</a>):</p>
+<p>Query with aggregation (<a href="../../api/query/sql.html">SQL frontend</a>):</p>
 <pre><code>$ curl -s -X POST -d &quot;SELECT DISTINCT(Landlord), COUNT(Address) FROM properties GROUP BY Landlord&quot; localhost:8080/api/sql | jq
 
 [
@@ -236,7 +236,7 @@ with ROAPI.</p>
   }
 ]
 </code></pre>
-<p>Query with filter (<a href="/api/query/graphql.html">GraphQL frontend</a>):</p>
+<p>Query with filter (<a href="../../api/query/graphql.html">GraphQL frontend</a>):</p>
 <pre><code>$ curl -s -X POST localhost:8080/api/graphql -d @- &lt;&lt;EOF | jq
 query {
   properties(
