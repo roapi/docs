@@ -440,11 +440,15 @@ with ROAPI.</p>
 [2021-03-01T00:08:04Z INFO  actix_server::builder] Starting &quot;actix-web-service-127.0.0.1:8080&quot; service on 127.0.0.1:8080
 </code></pre>
 <p>Query with aggregation (<a href="config/dataset-formats/../../api/query/sql.html">SQL frontend</a>):</p>
-<pre><code>$ curl -s -X POST -d &quot;SELECT DISTINCT(Landlord), COUNT(Address) FROM properties GROUP BY Landlord&quot; localhost:8080/api/sql | jq
+<pre><code>$ curl -s -X POST localhost:8080/api/sql --data-binary @- &lt;&lt;EOF | jq
+SELECT DISTINCT(Landlord), COUNT(Address)
+FROM properties
+GROUP BY Landlord
+EOF
 
 [
   {
-    &quot;Landlord&quot;: &quot;Daniel&quot;,
+    &quot;Landlord&quot;: &quot;Roger&quot;,
     &quot;COUNT(Address)&quot;: 3
   },
   {
@@ -452,7 +456,7 @@ with ROAPI.</p>
     &quot;COUNT(Address)&quot;: 4
   },
   {
-    &quot;Landlord&quot;: &quot;Roger&quot;,
+    &quot;Landlord&quot;: &quot;Daniel&quot;,
     &quot;COUNT(Address)&quot;: 3
   },
   {
@@ -466,7 +470,7 @@ with ROAPI.</p>
 ]
 </code></pre>
 <p>Query with filter (<a href="config/dataset-formats/../../api/query/graphql.html">GraphQL frontend</a>):</p>
-<pre><code>$ curl -s -X POST localhost:8080/api/graphql -d @- &lt;&lt;EOF | jq
+<pre><code>$ curl -s -X POST localhost:8080/api/graphql --data-binary @- &lt;&lt;EOF | jq
 query {
   properties(
     filter: {
