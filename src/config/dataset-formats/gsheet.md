@@ -12,10 +12,10 @@ Here are the steps to configure the service account:
 1. [Activate Google Sheets API](https://console.developers.google.com/apis/library/sheets.googleapis.com) in the Google API Console.
 1. Create a service account: [https://console.developers.google.com/apis/api/sheets.googleapis.com/credentials](https://console.developers.google.com/apis/api/sheets.googleapis.com/credentials).
 1. Go into service account setting, click `ADD KEY` -> `Create new key`. Then select JSON format
-   and save it somewhere safe as a file. ![gsheet-add-key](/images/gsheet-add-key.png)
-1. Copy email address for your newly created service account, usually in the format of `{ACCOUNT_NAME}@{PROJECT_ID}.iam.gserviceaccount.com`. ![gsheet-service-account-email](/images/gsheet-service-account-email.png)
+   and save it somewhere safe as a file. ![gsheet-add-key](../../images/gsheet-add-key.png)
+1. Copy email address for your newly created service account, usually in the format of `{ACCOUNT_NAME}@{PROJECT_ID}.iam.gserviceaccount.com`. ![gsheet-service-account-email](../../images/gsheet-service-account-email.png)
 1. Open the Google spreadsheet that you want to serve, then share it with the newly created service
-   account using the service account email. ![gsheet-share-service-account](/images/gsheet-share-service-account.png)
+   account using the service account email. ![gsheet-share-service-account](../../images/gsheet-share-service-account.png)
 
 
 Now you can configure ROAPI to load the google spreadsheet into a table using:
@@ -51,7 +51,7 @@ $ roapi-http -c local.yaml
 [2021-03-01T00:08:04Z INFO  actix_server::builder] Starting "actix-web-service-127.0.0.1:8080" service on 127.0.0.1:8080
 ```
 
-Query with aggregation ([SQL frontend](/api/query/sql.html)):
+Query with aggregation ([SQL frontend](../../api/query/sql.html)):
 
 ```
 $ curl -s -X POST -d "SELECT DISTINCT(Landlord), COUNT(Address) FROM properties GROUP BY Landlord" localhost:8080/api/sql | jq
@@ -80,7 +80,7 @@ $ curl -s -X POST -d "SELECT DISTINCT(Landlord), COUNT(Address) FROM properties 
 ]
 ```
 
-Query with filter ([GraphQL frontend](/api/query/graphql.html)):
+Query with filter ([GraphQL frontend](../../api/query/graphql.html)):
 
 ```
 $ curl -s -X POST localhost:8080/api/graphql -d @- <<EOF | jq
