@@ -11,4 +11,4 @@ cargo install --git https://github.com/roapi/roapi --branch main --bin roapi-htt
 
 ## Docker
 
-A prebuilt docker image is also available at [ghcr.io/roapi/roapi-http](https://github.com/orgs/roapi/packages/container/package/roapi-http).
+Pre-built docker images are hosted at [ghcr.io/roapi/roapi-http](https://github.com/orgs/roapi/packages/container/package/roapi-http).

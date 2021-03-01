@@ -3,8 +3,8 @@
 To query tables through GraphQL, send the query through `POST` request to
 `/api/graphql` endpoint.
 
-GraphQL query interface supports the same set of operators supported by REST
-API. Here how you can apply various operators to your query:
+GraphQL query frontend supports the same set of operators supported by [REST
+query frontend](rest.html). Here how is you can apply various operators in a query:
 
 ```graphql
 {

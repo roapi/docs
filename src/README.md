@@ -1,5 +1,7 @@
 # ROAPI Documentation
 
+[![Project repository](https://img.shields.io/badge/github-repo-blue)](https://github.com/roapi/roapi)
+
 [ROAPI](https://github.com/roapi/roapi) automatically spins up read-only APIs
 for static datasets without requiring you to write a single line of code. It
 builds on top of [Apache Arrow](https://github.com/apache/arrow) and
@@ -17,3 +19,4 @@ various formats requested by client.
 See below for a high level diagram:
 
 <img alt="roapi-design-diagram" src="./images/roapi.svg">
+
