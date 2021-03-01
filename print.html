@@ -401,28 +401,106 @@ into a single table by directory path:</p>
 <footer id="open-on-gh">Found a bug? <a href="https://github.com/roapi/docs/edit/main/src/config/dataset-formats/csv.md">Edit this file on GitHub.</a></footer><h1 id="google-spreadsheet"><a class="header" href="#google-spreadsheet">Google spreadsheet</a></h1>
 <p>To serve a Google spreadsheet as API, you need to gather the following config values:</p>
 <ul>
-<li>Google spreadsheet URL</li>
-<li>Google spreadsheet sheet title (bottom of the spreadsheet UI)</li>
-<li>Service account secret key</li>
+<li>Google spreadsheet URL, usually in the form of <code>https://docs.google.com/spreadsheets/d/{SPREADSHEET_ID}#gid={SHEET_ID}</code>.</li>
+<li>(Optional) Google spreadsheet sheet title (bottom of the spreadsheet UI).
+This is required if <code>SHEET_ID</code> is not specified in URL through <code>#gid</code>.</li>
+<li>Google spreadsheet service account secret key.</li>
 </ul>
 <p>Here are the steps to configure the service account:</p>
 <ol>
-<li>Activate the Google Sheets API in the Google API Console.</li>
-<li>Create service account: https://console.developers.google.com/apis/api/sheets.googleapis.com/credentials.</li>
-<li>Go into service account setting and click <code>ADD KEY</code>. Then select JSON format
-and save it somewhere safe.</li>
-<li>Go back to Google spreadsheet and share it with the newly created service
-account through service account email).</li>
+<li><a href="https://console.developers.google.com/apis/library/sheets.googleapis.com">Activate Google Sheets API</a> in the Google API Console.</li>
+<li>Create a service account: <a href="https://console.developers.google.com/apis/api/sheets.googleapis.com/credentials">https://console.developers.google.com/apis/api/sheets.googleapis.com/credentials</a>.</li>
+<li>Go into service account setting, click <code>ADD KEY</code> -&gt; <code>Create new key</code>. Then select JSON format
+and save it somewhere safe as a file. <img src="config/dataset-formats//images/gsheet-add-key.png" alt="gsheet-add-key" /></li>
+<li>Copy email address for your newly created service account, usually in the format of <code>{ACCOUNT_NAME}@{PROJECT_ID}.iam.gserviceaccount.com</code>. <img src="config/dataset-formats//images/gsheet-service-account-email.png" alt="gsheet-service-account-email" /></li>
+<li>Open the Google spreadsheet that you want to serve, then share it with the newly created service
+account using the service account email. <img src="config/dataset-formats//images/gsheet-share-service-account.png" alt="gsheet-share-service-account" /></li>
 </ol>
-<p>ROAPI config to load the google spreadsheet as data source:</p>
+<p>Now you can configure ROAPI to load the google spreadsheet into a table using:</p>
 <pre><code class="language-yaml">tables:
   - name: &quot;table_name&quot;
     uri: &quot;https://docs.google.com/spreadsheets/d/1-lc4oij04aXzFSRMwVBLjU76s-K0-s6UPc2biOvtuuU#gid=0&quot;
     option:
       format: &quot;google_spreadsheet&quot;
       application_secret_path: &quot;path/to/service_account_key.json&quot;
+      # sheet_title is optional if `#gid` is specified in uri
       sheet_title: &quot;sheet_name_within_google_spreadsheet&quot;
 </code></pre>
+<p>ROAPI only invokes Google Sheets API during the initial data load, subsequent
+query requests are served using in memory data.</p>
+<h2 id="example"><a class="header" href="#example">Example</a></h2>
+<p>Here is what it looks like to serve <a href="https://docs.google.com/spreadsheets/d/e/2PACX-1vRodiBkE77d8Y7FLe2BwwNNqy0jc3oSrtsGRrWMXXyAgdl68LxKm_LS0qfMVXa-ioPDP-5jurzKUJ0N/pubhtml">this public google
+spreadsheet</a>
+with ROAPI.</p>
+<p>Start server:</p>
+<pre><code>$ roapi-http -c local.yaml
+[2021-03-01T00:08:03Z INFO  roapi_http::api] loading `https://docs.google.com/spreadsheets/d/1-lc4oij04aXzFSRMwVBLjU76s-K0-s6UPc2biOvtuuU#gid=0` as table `properties`
+[2021-03-01T00:08:04Z INFO  roapi_http::api] registered `https://docs.google.com/spreadsheets/d/1-lc4oij04aXzFSRMwVBLjU76s-K0-s6UPc2biOvtuuU#gid=0` as table `properties`
+[2021-03-01T00:08:04Z INFO  actix_server::builder] Starting 8 workers
+[2021-03-01T00:08:04Z INFO  actix_server::builder] Starting &quot;actix-web-service-127.0.0.1:8080&quot; service on 127.0.0.1:8080
+</code></pre>
+<p>Query with aggregation (<a href="config/dataset-formats//api/query/sql.html">SQL frontend</a>):</p>
+<pre><code>$ curl -s -X POST -d &quot;SELECT DISTINCT(Landlord), COUNT(Address) FROM properties GROUP BY Landlord&quot; localhost:8080/api/sql | jq
+
+[
+  {
+    &quot;Landlord&quot;: &quot;Daniel&quot;,
+    &quot;COUNT(Address)&quot;: 3
+  },
+  {
+    &quot;Landlord&quot;: &quot;Mike&quot;,
+    &quot;COUNT(Address)&quot;: 4
+  },
+  {
+    &quot;Landlord&quot;: &quot;Roger&quot;,
+    &quot;COUNT(Address)&quot;: 3
+  },
+  {
+    &quot;Landlord&quot;: &quot;Sam&quot;,
+    &quot;COUNT(Address)&quot;: 2
+  },
+  {
+    &quot;Landlord&quot;: &quot;Carl&quot;,
+    &quot;COUNT(Address)&quot;: 3
+  }
+]
+</code></pre>
+<p>Query with filter (<a href="config/dataset-formats//api/query/graphql.html">GraphQL frontend</a>):</p>
+<pre><code>$ curl -s -X POST localhost:8080/api/graphql -d @- &lt;&lt;EOF | jq
+query {
+  properties(
+    filter: {
+      Bed: { gt: 3 }
+      Bath: { gte: 3 }
+    }
+    sort: [
+      { field: &quot;Bed&quot;, order: &quot;desc&quot; }
+    ]
+  ) {
+    Address
+    Bed
+    Bath
+  }
+}
+EOF
+
+[
+  {
+    &quot;Address&quot;: &quot;Kenmore, WA&quot;,
+    &quot;Bed&quot;: 4,
+    &quot;Bath&quot;: 3,
+    &quot;Monthly_Rent&quot;: &quot;$4,000&quot;
+  },
+  {
+    &quot;Address&quot;: &quot;Fremont, WA&quot;,
+    &quot;Bed&quot;: 5,
+    &quot;Bath&quot;: 3,
+    &quot;Monthly_Rent&quot;: &quot;$4,500&quot;
+  }
+]
+</code></pre>
+<p>Note: when inferring table schema from Google spreadsheets, ROAPI automatically
+replaces spaces in column names with <code>_</code>(underscore).</p>
 <footer id="open-on-gh">Found a bug? <a href="https://github.com/roapi/docs/edit/main/src/config/dataset-formats/gsheet.md">Edit this file on GitHub.</a></footer><h1 id="blob-store"><a class="header" href="#blob-store">Blob store</a></h1>
 <p>ROAPI currently supports the following blob storages:</p>
 <ul>
