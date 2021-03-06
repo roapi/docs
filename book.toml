@@ -8,6 +8,7 @@ title = "ROAPI Documentation"
 [output.html]
 git-repository-url = "https://github.com/roapi/docs"
 additional-css = ["open-in-gh.css"]
+google-analytics = "G-4GB4QQGXTJ"
 
 [preprocessor.open-on-gh]
 command = "mdbook-open-on-gh"

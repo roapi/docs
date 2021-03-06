@@ -3,7 +3,7 @@
 Query tables through REST API by sending `GET` requests to
 `/api/tables/{table_name}`. Query operators are specified as query params.
 
-REST API currently supports the following query operators:
+REST query frontend currently supports the following query operators:
 
 * columns
 * sort
