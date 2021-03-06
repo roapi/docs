@@ -1,6 +1,6 @@
 # ROAPI Documentation
 
-[![Project repository](https://img.shields.io/badge/github-repo-blue)](https://github.com/roapi/roapi)
+[![Project repository](https://img.shields.io/badge/repo-github-blue)](https://github.com/roapi/roapi)
 
 [ROAPI](https://github.com/roapi/roapi) automatically spins up read-only APIs
 for static datasets without requiring you to write a single line of code. It
