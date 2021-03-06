@@ -49,6 +49,17 @@
         
 
         
+
+        
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-4GB4QQGXTJ"></script>
+        <script>
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-4GB4QQGXTJ');
+        </script>
+        
     </head>
     <body>
         <!-- Provide site root to javascript -->
@@ -172,7 +183,7 @@
                 <div id="content" class="content">
                     <main>
                         <h1 id="roapi-documentation"><a class="header" href="#roapi-documentation">ROAPI Documentation</a></h1>
-<p><a href="https://github.com/roapi/roapi"><img src="https://img.shields.io/badge/github-repo-blue" alt="Project repository" /></a></p>
+<p><a href="https://github.com/roapi/roapi"><img src="https://img.shields.io/badge/repo-github-blue" alt="Project repository" /></a></p>
 <p><a href="https://github.com/roapi/roapi">ROAPI</a> automatically spins up read-only APIs
 for static datasets without requiring you to write a single line of code. It
 builds on top of <a href="https://github.com/apache/arrow">Apache Arrow</a> and
@@ -536,7 +547,7 @@ that supports table joins.</p>
 <footer id="open-on-gh">Found a bug? <a href="https://github.com/roapi/docs/edit/main/src/api/query/sql.md">Edit this file on GitHub.</a></footer><h1 id="rest"><a class="header" href="#rest">REST</a></h1>
 <p>Query tables through REST API by sending <code>GET</code> requests to
 <code>/api/tables/{table_name}</code>. Query operators are specified as query params.</p>
-<p>REST API currently supports the following query operators:</p>
+<p>REST query frontend currently supports the following query operators:</p>
 <ul>
 <li>columns</li>
 <li>sort</li>
