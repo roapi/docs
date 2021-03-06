@@ -26,7 +26,7 @@ jobs:
       - name: Install mdbook-open-on-gh
         run: |
           cargo install --git https://github.com/houqp/mdbook-open-on-gh --branch main
-          cargo install --git https://github.com/houqp/mdBook.git --branch ga --bin mdbook
+          cargo install --git https://github.com/houqp/mdBook --branch ga --bin mdbook
 
       - name: Build
         run: |
