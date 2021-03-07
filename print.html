@@ -522,19 +522,48 @@ replaces spaces in column names with <code>_</code>(underscore).</p>
 <ul>
 <li>Filesystem</li>
 <li>HTTP/HTTPS</li>
-<li>S3 (WIP)</li>
+<li>S3</li>
 </ul>
 <h2 id="filesystem"><a class="header" href="#filesystem">Filesystem</a></h2>
 <p>Uri without a scheme prefix is treated as filesystem backed data source by
 ROAPI. For example, to serve a local parquet file <code>test_data/blogs.parquet</code>, you
-can just set the uri to the file path.</p>
+can just set the uri to the file path:</p>
+<pre><code class="language-yaml">tables:
+  - name: &quot;blogs&quot;
+    uri: &quot;test_data/blogs.parquet&quot;
+</code></pre>
 <p>Filesystem store supports loading partitioned tables. In other words, you can
 split up the table into mulitple files and load all of them into a single table
-by setting uri to the directory path.</p>
+by setting uri to the directory path. When loading a partitioned dataset, you
+will need to manually specify table format since the uri will not contain table
+format as a suffix:</p>
+<pre><code class="language-yaml">tables:
+  - name: &quot;blogs&quot;
+    uri: &quot;test_data/blogs/&quot;
+    option:
+        format: &quot;parquet&quot;
+</code></pre>
 <h2 id="httphttps"><a class="header" href="#httphttps">HTTP/HTTPS</a></h2>
 <p>ROAPI can build tables from datasets served through HTTP protocols. However, one
 thing to keep in mind is HTTP store doesn't support partitioned datasets because
-there is no native directory support in HTTP.</p>
+there is no native directory support in HTTP protocol.</p>
+<h2 id="s3"><a class="header" href="#s3">S3</a></h2>
+<p>ROAPI can build tables from datasets hosted in S3 buckets. Configuration is
+similar to filesystem store:</p>
+<pre><code class="language-yaml">tables:
+  - name: &quot;TABLE_NAME&quot;
+    uri: &quot;s3://BUCKET/TABLE/KEY&quot;
+    option:
+        format: &quot;csv&quot;
+</code></pre>
+<p>Note that AWS region needs to be manually specified through <code>AWS_REGION</code>
+environment variable.</p>
+<p>To configure S3 credentials, you can use IAM role or set the following
+environment variables if you are using IAM user:</p>
+<ul>
+<li><code>AWS_SECRET_ACCESS_KEY</code></li>
+<li><code>AWS_ACCESS_KEY_ID</code></li>
+</ul>
 <footer id="open-on-gh">Found a bug? <a href="https://github.com/roapi/docs/edit/main/src/config/blob-store.md">Edit this file on GitHub.</a></footer><h1 id="api"><a class="header" href="#api">API</a></h1>
 <footer id="open-on-gh">Found a bug? <a href="https://github.com/roapi/docs/edit/main/src/api/README.md">Edit this file on GitHub.</a></footer><h1 id="query-frontends"><a class="header" href="#query-frontends">Query frontends</a></h1>
 <footer id="open-on-gh">Found a bug? <a href="https://github.com/roapi/docs/edit/main/src/api/query/README.md">Edit this file on GitHub.</a></footer><h1 id="sql"><a class="header" href="#sql">SQL</a></h1>
@@ -584,7 +613,12 @@ query frontend</a>. Here how is you can apply various operators in a query:</p>
 }
 </code></pre>
 <footer id="open-on-gh">Found a bug? <a href="https://github.com/roapi/docs/edit/main/src/api/query/graphql.md">Edit this file on GitHub.</a></footer><h1 id="schema"><a class="header" href="#schema">Schema</a></h1>
-<p>TODO</p>
+<p>Get schemas for all tables:</p>
+<pre><code class="language-bash">curl localhost:8080/api/schema
+</code></pre>
+<p>Get schema for a specific table by name:</p>
+<pre><code class="language-bash">curl localhost:8080/api/schema/{TABLE_NAME}
+</code></pre>
 <footer id="open-on-gh">Found a bug? <a href="https://github.com/roapi/docs/edit/main/src/api/schema.md">Edit this file on GitHub.</a></footer><h1 id="response-serialization"><a class="header" href="#response-serialization">Response serialization</a></h1>
 <p>By default, ROAPI encodes responses in JSON format, but you can request
 different encodings by specifying the <code>ACCEPT</code> header:</p>
