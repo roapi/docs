@@ -11,6 +11,7 @@
         - [Parquet](config/dataset-formats/parquet.md)
         - [CSV](config/dataset-formats/csv.md)
         - [Google spreadsheet](./config/dataset-formats/gsheet.md)
+        - [NDJSON](config/dataset-formats/ndjson.md)
     - [Blob store](./config/blob-store.md)
 - [API](api/README.md)
     - [Query frontends](api/query/README.md)
