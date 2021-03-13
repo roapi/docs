@@ -3,7 +3,7 @@
 When a table uri ends in `.json`, ROAPI will try to load it as JSON table if no
 `format` option is specified:
 
-```
+```yaml
 tables:
   - name: "mytable"
     uri: "http://mytable.json"

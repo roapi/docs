@@ -12,6 +12,7 @@
         - [CSV](config/dataset-formats/csv.md)
         - [Google spreadsheet](./config/dataset-formats/gsheet.md)
         - [NDJSON](config/dataset-formats/ndjson.md)
+        - [Delta Lake](config/dataset-formats/delta.md)
     - [Blob store](./config/blob-store.md)
 - [API](api/README.md)
     - [Query frontends](api/query/README.md)

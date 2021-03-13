@@ -7,7 +7,7 @@ processed one record at a time.
 When a table uri ends in `.ndjson`, ROAPI will try to load it as NDJSON table
 if no `format` option is specified:
 
-```
+```yaml
 tables:
   - name: "mytable"
     uri: "http://mytable.ndjson"
