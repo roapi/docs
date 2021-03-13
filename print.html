@@ -276,7 +276,29 @@ by each frontend.</p>
 </code></pre>
 <footer id="open-on-gh">Found a bug? <a href="https://github.com/roapi/docs/edit/main/src/quickstart.md">Edit this file on GitHub.</a></footer><h1 id="config"><a class="header" href="#config">Config</a></h1>
 <footer id="open-on-gh">Found a bug? <a href="https://github.com/roapi/docs/edit/main/src/config/README.md">Edit this file on GitHub.</a></footer><h1 id="command-line-argument"><a class="header" href="#command-line-argument">Command line argument</a></h1>
-<p>You can configure ROAPI to load as many tables as you want by repeating the <code>--table</code> argument.</p>
+<p>You can configure ROAPI to load as many tables as you want by repeating the <code>--table</code> argument:</p>
+<pre><code>roapi-http --table 'table1_name:table1_uri' --table 'table2_name:table2_uri'
+</code></pre>
+<p>You can use <code>RUST_LOG</code> environment variable to control the logging verbosity:</p>
+<pre><code>RUST_LOG=debug roapi-http ...
+</code></pre>
+<p>Here is the output from <code>roapi-http --help</code>:</p>
+<pre><code>roapi-http 0.1.1
+QP Hou
+Create full-fledged APIs for static datasets without writing a single line of code.
+
+USAGE:
+    roapi-http [OPTIONS]
+
+FLAGS:
+    -h, --help       Prints help information
+    -V, --version    Prints version information
+
+OPTIONS:
+    -a, --addr &lt;IP:PORT&gt;               bind address
+    -c, --config &lt;config&gt;              config file path
+    -t, --table &lt;table_name:uri&gt;...    table sources to load
+</code></pre>
 <footer id="open-on-gh">Found a bug? <a href="https://github.com/roapi/docs/edit/main/src/config/cli.md">Edit this file on GitHub.</a></footer><h1 id="yaml-config"><a class="header" href="#yaml-config">YAML config</a></h1>
 <p>You can configure multiple table sources using YAML config, which supports more
 advanced format specific table options. For example:</p>
