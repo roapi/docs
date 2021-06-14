@@ -22,5 +22,5 @@ Pre-built docker images are hosted at
 You need to install [Rust toolchain](https://rustup.rs/) if you haven't done so.
 
 ```bash
-cargo install --git https://github.com/roapi/roapi --branch main --bin roapi-http
+cargo install --locked --git https://github.com/roapi/roapi --branch main --bin roapi-http
 ```
