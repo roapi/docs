@@ -678,6 +678,12 @@ different encodings by specifying the <code>ACCEPT</code> header:</p>
     -d &quot;SELECT launch_library_id FROM spacex_launches WHERE launch_library_id IS NOT NULL&quot; \
     localhost:8080/api/sql
 </code></pre>
+<p>ROAPI currently supports the following serialization formats:</p>
+<ul>
+<li><code>application/json</code></li>
+<li><code>application/csv</code></li>
+<li><code>application/vnd.apache.arrow.stream</code></li>
+</ul>
 <footer id="open-on-gh">Found a bug? <a href="https://github.com/roapi/docs/edit/main/src/api/response.md">Edit this file on GitHub.</a></footer>
                     </main>
 
