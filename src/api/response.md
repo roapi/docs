@@ -9,3 +9,9 @@ curl -X POST \
     -d "SELECT launch_library_id FROM spacex_launches WHERE launch_library_id IS NOT NULL" \
     localhost:8080/api/sql
 ```
+
+ROAPI currently supports the following serialization formats:
+
+* `application/json`
+* `application/csv`
+* `application/vnd.apache.arrow.stream`
