@@ -184,13 +184,13 @@
 <p>Spin up APIs for <code>test_data/uk_cities_with_headers.csv</code> and
 <code>test_data/spacex-launches.json</code>:</p>
 <pre><code class="language-bash">roapi-http \
-    --table 'uk_cities:test_data/uk_cities_with_headers.csv' \
-    --table 'spacex_launches:test_data/spacex-launches.json'
+    --table 'uk_cities=test_data/uk_cities_with_headers.csv' \
+    --table 'test_data/spacex_launches.json'
 </code></pre>
 <p>Or using prebuilt docker image:</p>
 <pre><code>docker run -t --rm -p 8080:8080 ghcr.io/roapi/roapi-http:latest --addr 0.0.0.0:8080 \
-    --table 'uk_cities:test_data/uk_cities_with_headers.csv' \
-    --table 'spacex_launches:test_data/spacex-launches.json'
+    --table 'uk_cities=test_data/uk_cities_with_headers.csv' \
+    --table 'test_data/spacex_launches.json'
 </code></pre>
 <h2 id="query-api"><a class="header" href="#query-api">Query API</a></h2>
 <p>Query tables using SQL, GraphQL or REST:</p>

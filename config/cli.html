@@ -182,13 +182,13 @@
                     <main>
                         <h1 id="command-line-argument"><a class="header" href="#command-line-argument">Command line argument</a></h1>
 <p>You can configure ROAPI to load as many tables as you want by repeating the <code>--table</code> argument:</p>
-<pre><code>roapi-http --table 'table1_name:table1_uri' --table 'table2_name:table2_uri'
+<pre><code>roapi-http --table 'table1_name=table1_uri' --table 'table2_name=table2_uri'
 </code></pre>
 <p>You can use <code>RUST_LOG</code> environment variable to control the logging verbosity:</p>
 <pre><code>RUST_LOG=debug roapi-http ...
 </code></pre>
 <p>Here is the output from <code>roapi-http --help</code>:</p>
-<pre><code>roapi-http 0.1.1
+<pre><code>roapi-http 0.3.3
 QP Hou
 Create full-fledged APIs for static datasets without writing a single line of code.
 
@@ -200,9 +200,13 @@ FLAGS:
     -V, --version    Prints version information
 
 OPTIONS:
-    -a, --addr &lt;IP:PORT&gt;               bind address
-    -c, --config &lt;config&gt;              config file path
-    -t, --table &lt;table_name:uri&gt;...    table sources to load
+    -a, --addr &lt;IP:PORT&gt;                                           bind address
+    -c, --config &lt;config&gt;                                          config file path
+    -t, --table &lt;[table_name=]uri[,option_key=option_value]&gt;...
+            Table sources to load. Table option can be provided as optional setting as part of the
+            table URI, for example: `blogs=s3://bucket/key,format=delta`. Set table uri to `stdin`
+            if you want to consume table data from stdin as part of a UNIX pipe. If no table_name is
+            provided, a table name will be derived from the filename in URI.
 </code></pre>
 <footer id="open-on-gh">Found a bug? <a href="https://github.com/roapi/docs/edit/main/src/config/cli.md">Edit this file on GitHub.</a></footer>
                     </main>
