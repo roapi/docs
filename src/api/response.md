@@ -15,3 +15,4 @@ ROAPI currently supports the following serialization formats:
 * `application/json`
 * `application/csv`
 * `application/vnd.apache.arrow.stream`
+* `application/parquet`
