@@ -13,6 +13,7 @@
         - [Google spreadsheet](./config/dataset-formats/gsheet.md)
         - [NDJSON](config/dataset-formats/ndjson.md)
         - [Delta Lake](config/dataset-formats/delta.md)
+        - [Arrow](config/dataset-formats/arrow.md)
     - [Blob store](./config/blob-store.md)
 - [API](api/README.md)
     - [Query frontends](api/query/README.md)
