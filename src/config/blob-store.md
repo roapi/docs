@@ -8,9 +8,12 @@ ROAPI currently supports the following blob storages:
 
 ## Filesystem
 
-Uri without a scheme prefix is treated as filesystem backed data source by
-ROAPI. For example, to serve a local parquet file `test_data/blogs.parquet`, you
-can just set the uri to the file path:
+Filesystem store can be specified using `file:` or `filesystem:` schemes.  In a
+Windows environment, the scheme is mandatory.  On Unix systems, a uri without a
+scheme prefix is treated as filesystem backed data source by ROAPI. 
+
+For example, to serve a local parquet file `test_data/blogs.parquet`, you can
+just set the uri to the file path:
 
 ```yaml
 tables:
