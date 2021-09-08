@@ -35,7 +35,7 @@ tables:
     uri: "./path/to/delta_table"
     option:
       format: "delta"
-	  use_memory_table: false
+      use_memory_table: false
 ```
 
 Note that when providing `use_memory_table` option, it becomes necessary to
