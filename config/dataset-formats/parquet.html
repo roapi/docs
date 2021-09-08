@@ -195,6 +195,27 @@ into a single table by directory path:</p>
     option:
       format: &quot;parquet&quot;
 </code></pre>
+<h2 id="large-datasets"><a class="header" href="#large-datasets">Large Datasets</a></h2>
+<p>ROAPI loads the entire table into memory as the default behavior.  If your
+table is large or you want to avoid loading all data during startup, you can
+set an additional option <code>use_memory_table: false</code> (default: <code>true</code>). With that
+configuration, ROAPI will not copy the data into memory, but instructs datafusion
+to directly operate on the backing storage.</p>
+<p>At the moment, this comes with the following limitations:</p>
+<ol>
+<li>no nested schema: <a href="https://github.com/apache/arrow-datafusion/issues/83">datafusion#83</a></li>
+<li>missing support for cloud storage: <a href="https://github.com/apache/arrow-datafusion/issues/616">datafusion#616</a></li>
+</ol>
+<p>Example:</p>
+<pre><code class="language-yaml">tables:
+  - name: &quot;mytable&quot;
+    uri: &quot;./table_dir&quot;
+    option:
+      format: &quot;parquet&quot;
+      use_memory_table: false
+</code></pre>
+<p>Note that when providing <code>use_memory_table</code> option, it becomes necessary to
+also specify the format.</p>
 <footer id="open-on-gh">Found a bug? <a href="https://github.com/roapi/docs/edit/main/src/config/dataset-formats/parquet.md">Edit this file on GitHub.</a></footer>
                     </main>
 

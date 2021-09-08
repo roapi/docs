@@ -188,9 +188,11 @@
 <li>S3</li>
 </ul>
 <h2 id="filesystem"><a class="header" href="#filesystem">Filesystem</a></h2>
-<p>Uri without a scheme prefix is treated as filesystem backed data source by
-ROAPI. For example, to serve a local parquet file <code>test_data/blogs.parquet</code>, you
-can just set the uri to the file path:</p>
+<p>Filesystem store can be specified using <code>file:</code> or <code>filesystem:</code> schemes.  In a
+Windows environment, the scheme is mandatory.  On Unix systems, a uri without a
+scheme prefix is treated as filesystem backed data source by ROAPI. </p>
+<p>For example, to serve a local parquet file <code>test_data/blogs.parquet</code>, you can
+just set the uri to the file path:</p>
 <pre><code class="language-yaml">tables:
   - name: &quot;blogs&quot;
     uri: &quot;test_data/blogs.parquet&quot;

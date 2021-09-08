@@ -428,6 +428,27 @@ into a single table by directory path:</p>
     option:
       format: &quot;parquet&quot;
 </code></pre>
+<h2 id="large-datasets"><a class="header" href="#large-datasets">Large Datasets</a></h2>
+<p>ROAPI loads the entire table into memory as the default behavior.  If your
+table is large or you want to avoid loading all data during startup, you can
+set an additional option <code>use_memory_table: false</code> (default: <code>true</code>). With that
+configuration, ROAPI will not copy the data into memory, but instructs datafusion
+to directly operate on the backing storage.</p>
+<p>At the moment, this comes with the following limitations:</p>
+<ol>
+<li>no nested schema: <a href="https://github.com/apache/arrow-datafusion/issues/83">datafusion#83</a></li>
+<li>missing support for cloud storage: <a href="https://github.com/apache/arrow-datafusion/issues/616">datafusion#616</a></li>
+</ol>
+<p>Example:</p>
+<pre><code class="language-yaml">tables:
+  - name: &quot;mytable&quot;
+    uri: &quot;./table_dir&quot;
+    option:
+      format: &quot;parquet&quot;
+      use_memory_table: false
+</code></pre>
+<p>Note that when providing <code>use_memory_table</code> option, it becomes necessary to
+also specify the format.</p>
 <footer id="open-on-gh">Found a bug? <a href="https://github.com/roapi/docs/edit/main/src/config/dataset-formats/parquet.md">Edit this file on GitHub.</a></footer><h1 id="csv"><a class="header" href="#csv">CSV</a></h1>
 <p>When a table uri ends in <code>.csv</code>, ROAPI will try to load it as CSV table if no
 <code>format</code> option is specified:</p>
@@ -572,6 +593,27 @@ explicitly for Delta table sources:</p>
     option:
       format: &quot;delta&quot;
 </code></pre>
+<h2 id="large-datasets-1"><a class="header" href="#large-datasets-1">Large Datasets</a></h2>
+<p>ROAPI loads the entire table into memory as the default behavior.  If your
+table is large or you want to avoid loading all data during startup, you can
+set an additional option <code>use_memory_table: false</code> (default: <code>true</code>). With that
+configuration, ROAPI will not copy the data into memory, but instructs datafusion
+to directly operate on the backing storage.</p>
+<p>At the moment, this comes with the following limitations:</p>
+<ol>
+<li>no nested schema: <a href="https://github.com/apache/arrow-datafusion/issues/83">datafusion#83</a></li>
+<li>missing support for cloud storage: <a href="https://github.com/apache/arrow-datafusion/issues/616">datafusion#616</a></li>
+</ol>
+<p>Example:</p>
+<pre><code class="language-yaml">tables:
+  - name: &quot;mytable&quot;
+    uri: &quot;./path/to/delta_table&quot;
+    option:
+      format: &quot;delta&quot;
+      use_memory_table: false
+</code></pre>
+<p>Note that when providing <code>use_memory_table</code> option, it becomes necessary to
+also specify the format.</p>
 <footer id="open-on-gh">Found a bug? <a href="https://github.com/roapi/docs/edit/main/src/config/dataset-formats/delta.md">Edit this file on GitHub.</a></footer><h1 id="arrow"><a class="header" href="#arrow">Arrow</a></h1>
 <p>When a table uri ends in <code>.arrow</code> or <code>.arrows</code>, ROAPI will try to load it as Arrow IPC 
 file or stream if no <code>format</code> option is specified:</p>
@@ -595,9 +637,11 @@ into a single table by directory path:</p>
 <li>S3</li>
 </ul>
 <h2 id="filesystem"><a class="header" href="#filesystem">Filesystem</a></h2>
-<p>Uri without a scheme prefix is treated as filesystem backed data source by
-ROAPI. For example, to serve a local parquet file <code>test_data/blogs.parquet</code>, you
-can just set the uri to the file path:</p>
+<p>Filesystem store can be specified using <code>file:</code> or <code>filesystem:</code> schemes.  In a
+Windows environment, the scheme is mandatory.  On Unix systems, a uri without a
+scheme prefix is treated as filesystem backed data source by ROAPI. </p>
+<p>For example, to serve a local parquet file <code>test_data/blogs.parquet</code>, you can
+just set the uri to the file path:</p>
 <pre><code class="language-yaml">tables:
   - name: &quot;blogs&quot;
     uri: &quot;test_data/blogs.parquet&quot;
