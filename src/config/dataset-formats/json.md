@@ -62,9 +62,9 @@ Can be stored as:
 ]
 ```
 
-When loading JSON rows using array encoding, one needs to explicily specify the
-schema since there is no column name in the datasource anymore for ROAPI to
-perform the schema inference:
+However, when loading JSON rows using array encoding, you must explicitly specify
+the schema, since there is no column name in the datasource anymore for ROAPI to
+perform the schema inference.
 
 ```yaml
 tables:

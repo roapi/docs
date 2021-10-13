@@ -2,10 +2,10 @@
 
 ## Pre-built binary
 
-Platform specific pre-built binaries for each release is hosted on our [Github
+Platform specific pre-built binaries for each release are hosted on our [Github
 release page](https://github.com/roapi/roapi/releases).
 
-You can download and install them with a signle command using pip:
+You can download and install them with a single command using pip:
 
 ```bash
 pip install roapi-http
