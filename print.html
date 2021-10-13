@@ -202,9 +202,9 @@ various formats requested by client.</li>
 <img alt="roapi-design-diagram" src="./images/roapi.svg">
 <footer id="open-on-gh">Found a bug? <a href="https://github.com/roapi/docs/edit/main/src/README.md">Edit this file on GitHub.</a></footer><h1 id="installation"><a class="header" href="#installation">Installation</a></h1>
 <h2 id="pre-built-binary"><a class="header" href="#pre-built-binary">Pre-built binary</a></h2>
-<p>Platform specific pre-built binaries for each release is hosted on our <a href="https://github.com/roapi/roapi/releases">Github
+<p>Platform specific pre-built binaries for each release are hosted on our <a href="https://github.com/roapi/roapi/releases">Github
 release page</a>.</p>
-<p>You can download and install them with a signle command using pip:</p>
+<p>You can download and install them with a single command using pip:</p>
 <pre><code class="language-bash">pip install roapi-http
 </code></pre>
 <h2 id="docker"><a class="header" href="#docker">Docker</a></h2>
@@ -397,9 +397,9 @@ convention allows us to avoid repeating column names in every row.</p>
     [2, &quot;efg&quot;]
 ]
 </code></pre>
-<p>When loading JSON rows using array encoding, one needs to explicily specify the
-schema since there is no column name in the datasource anymore for ROAPI to
-perform the schema inference:</p>
+<p>However, when loading JSON rows using array encoding, you must explicitly specify
+the schema, since there is no column name in the datasource anymore for ROAPI to
+perform the schema inference.</p>
 <pre><code class="language-yaml">tables:
   - name: &quot;mytable&quot;
     uri: &quot;http://mytable.json&quot;

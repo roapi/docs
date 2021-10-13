@@ -222,9 +222,9 @@ convention allows us to avoid repeating column names in every row.</p>
     [2, &quot;efg&quot;]
 ]
 </code></pre>
-<p>When loading JSON rows using array encoding, one needs to explicily specify the
-schema since there is no column name in the datasource anymore for ROAPI to
-perform the schema inference:</p>
+<p>However, when loading JSON rows using array encoding, you must explicitly specify
+the schema, since there is no column name in the datasource anymore for ROAPI to
+perform the schema inference.</p>
 <pre><code class="language-yaml">tables:
   - name: &quot;mytable&quot;
     uri: &quot;http://mytable.json&quot;
