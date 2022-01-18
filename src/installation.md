@@ -11,6 +11,13 @@ You can download and install them with a single command using pip:
 pip install roapi-http
 ```
 
+If you are using homebrew, you can also install using `brew` command:
+
+```bash
+brew install roapi
+# notice that the binary itself is still roapi-http
+```
+
 ## Docker
 
 Pre-built docker images are hosted at
