@@ -1,5 +1,7 @@
 # YAML config
 
+## Tables
+
 You can configure multiple table sources using YAML config, which supports more
 advanced format specific table options. For example:
 
@@ -43,7 +45,25 @@ tables:
     uri: "https://jobs.github.com/positions.json"
 ```
 
-To run serve tables using config file:
+## Key value stores
+
+Table sources can be loaded into in-memory key value stores if you specify which two
+columns to be used to load keys and values in the config:
+
+```yaml
+kvstores:
+  - name: "spacex_launch_name"
+    uri: "test_data/spacex_launches.json"
+    key: id
+    value: name
+```
+
+The above config will create a keyvalue store named `spacex_launch_name` that allows you to lookup SpaceX launch names using launch ids.
+
+
+## Specify a config file on startup
+
+Use `-c` argument to run ROAPI using a specific config file:
 
 ```bash
 roapi-http -c ./roapi.yml
