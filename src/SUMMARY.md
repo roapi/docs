@@ -20,5 +20,6 @@
         - [SQL](api/query/sql.md)
         - [REST](api/query/rest.md)
         - [GraphQL](api/query/graphql.md)
+        - [Key value lookup](api/query/kv.md)
     - [Schema](api/schema.md)
     - [Response serialization](api/response.md)
