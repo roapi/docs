@@ -4,7 +4,7 @@ Spin up APIs for `test_data/uk_cities_with_headers.csv` and
 `test_data/spacex-launches.json`:
 
 ```bash
-roapi-http \
+roapi \
     --table "uk_cities=test_data/uk_cities_with_headers.csv" \
     --table "test_data/spacex_launches.json"
 ```
@@ -12,7 +12,7 @@ roapi-http \
 Or using prebuilt docker image:
 
 ```
-docker run -t --rm -p 8080:8080 ghcr.io/roapi/roapi-http:latest --addr 0.0.0.0:8080 \
+docker run -t --rm -p 8080:8080 ghcr.io/roapi/roapi:latest --addr-http 0.0.0.0:8080 \
     --table "uk_cities=test_data/uk_cities_with_headers.csv" \
     --table "test_data/spacex_launches.json"
 ```

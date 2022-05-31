@@ -8,7 +8,7 @@ release page](https://github.com/roapi/roapi/releases).
 You can download and install them with a single command using pip:
 
 ```bash
-pip install roapi-http
+pip install roapi
 ```
 
 If you are using homebrew, you can also install using `brew` command:
@@ -21,7 +21,7 @@ brew install roapi
 ## Docker
 
 Pre-built docker images are hosted at
-[ghcr.io/roapi/roapi-http](https://github.com/orgs/roapi/packages/container/package/roapi-http).
+[ghcr.io/roapi/roapi](https://github.com/orgs/roapi/packages/container/package/roapi).
 
 
 ## Build from source
@@ -29,5 +29,5 @@ Pre-built docker images are hosted at
 You need to install [Rust toolchain](https://rustup.rs/) if you haven't done so.
 
 ```bash
-cargo install --locked --git https://github.com/roapi/roapi --branch main --bins roapi-http
+cargo install --locked --git https://github.com/roapi/roapi --branch main --bins roapi
 ```

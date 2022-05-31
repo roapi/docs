@@ -6,7 +6,11 @@ You can configure multiple table sources using YAML config, which supports more
 advanced format specific table options. For example:
 
 ```yaml
-addr: 0.0.0.0:8084
+addr:
+  # binding address for TCP port that speaks HTTP protocol
+  http: 0.0.0.0:8084
+  # binding address for TCP port that speaks Postgres wire protocol
+  postgres: 0.0.0.0:5432
 tables:
   - name: "blogs"
     uri: "test_data/blogs.parquet"
@@ -66,5 +70,5 @@ The above config will create a keyvalue store named `spacex_launch_name` that al
 Use `-c` argument to run ROAPI using a specific config file:
 
 ```bash
-roapi-http -c ./roapi.yml
+roapi -c ./roapi.yml
 ```

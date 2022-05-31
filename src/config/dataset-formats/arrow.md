@@ -1,7 +1,7 @@
 # Arrow
 
-When a table uri ends in `.arrow` or `.arrows`, ROAPI will try to load it as Arrow IPC 
-file or stream if no `format` option is specified:
+When a table uri ends in `.arrow` or `.arrows`, ROAPI will try to load it as
+Arrow IPC file or stream if no `format` option is specified:
 
 ```yaml
 tables:
