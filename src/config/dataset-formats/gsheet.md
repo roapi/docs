@@ -44,47 +44,77 @@ with ROAPI.
 Start server:
 
 ```
-$ roapi-http -c local.yaml
-[2021-03-01T00:08:03Z INFO  roapi_http::api] loading `https://docs.google.com/spreadsheets/d/1-lc4oij04aXzFSRMwVBLjU76s-K0-s6UPc2biOvtuuU#gid=0` as table `properties`
-[2021-03-01T00:08:04Z INFO  roapi_http::api] registered `https://docs.google.com/spreadsheets/d/1-lc4oij04aXzFSRMwVBLjU76s-K0-s6UPc2biOvtuuU#gid=0` as table `properties`
-[2021-03-01T00:08:04Z INFO  actix_server::builder] Starting 8 workers
-[2021-03-01T00:08:04Z INFO  actix_server::builder] Starting "actix-web-service-127.0.0.1:8080" service on 127.0.0.1:8080
+$ roapi -c local.yaml
+[2022-05-31T01:07:55Z INFO  roapi::context] loading `uri(https://docs.google.com/spreadsheets/d/1-lc4oij04aXzFSRMwVBLjU76s-K0-s6UPc2biOvtuuU#gid=0)` as table `properties`
+[2022-05-31T01:07:56Z INFO  roapi::context] registered `uri(https://docs.google.com/spreadsheets/d/1-lc4oij04aXzFSRMwVBLjU76s-K0-s6UPc2biOvtuuU#gid=0)` as table `properties`
+[2022-05-31T01:07:56Z INFO  roapi::startup] 🚀 Listening on 127.0.0.1:5432 for Postgres traffic...
+[2022-05-31T01:07:56Z INFO  roapi::startup] 🚀 Listening on 127.0.0.1:8080 for HTTP traffic...
 ```
 
-Query with aggregation using [SQL frontend](../../api/query/sql.html):
+Query through [Postgres wire protocol](../../postgres.html):
+
+```
+$ psql -h 127.0.0.1
+psql (12.10 (Ubuntu 12.10-0ubuntu0.20.04.1), server 13)
+WARNING: psql major version 12, server major version 13.
+         Some psql features might not work.
+Type "help" for help.
+
+houqp=> select "Address", "Bed", "Bath", "Occupied" from properties;
+     Address      | Bed | Bath | Occupied
+------------------+-----+------+----------
+ Bothell, WA      |   3 |    2 | f
+ Lynnwood, WA     |   2 |    1 | f
+ Kirkland, WA     |   4 |    2 | f
+ Kent, WA         |   3 |    2 | f
+ Mount Vernon, WA |   2 |    1 | f
+ Seattle, WA      |   3 |    1 | f
+ Seattle, WA      |   2 |    1 | f
+ Shoreline, WA    |   1 |    1 | f
+ Bellevue, WA     |   3 |    1 | f
+ Renton, WA       |   4 |    2 | f
+ Woodinville, WA  |   3 |    3 | f
+ Kenmore, WA      |   4 |    3 | f
+ Fremont, WA      |   5 |    3 | f
+ Redmond, WA      |   2 |    2 | f
+ Mill Creek, WA   |   3 |    3 | f
+(15 rows)
+```
+
+Query with aggregation using [HTTP SQL frontend](../../api/query/sql.html):
 
 ```
 $ curl -s -X POST localhost:8080/api/sql --data-binary @- <<EOF | jq
-SELECT DISTINCT(Landlord), COUNT(Address)
+SELECT DISTINCT("Landlord"), COUNT("Address")
 FROM properties
-GROUP BY Landlord
+GROUP BY "Landlord"
 EOF
 
 [
   {
+    "Landlord": "Carl",
+    "COUNT(properties.Address)": 3
+  },
+  {
     "Landlord": "Roger",
-    "COUNT(Address)": 3
+    "COUNT(properties.Address)": 3
   },
   {
     "Landlord": "Mike",
-    "COUNT(Address)": 4
-  },
-  {
-    "Landlord": "Daniel",
-    "COUNT(Address)": 3
+    "COUNT(properties.Address)": 4
   },
   {
     "Landlord": "Sam",
-    "COUNT(Address)": 2
+    "COUNT(properties.Address)": 2
   },
   {
-    "Landlord": "Carl",
-    "COUNT(Address)": 3
+    "Landlord": "Daniel",
+    "COUNT(properties.Address)": 3
   }
 ]
 ```
 
-Query with filter using [GraphQL frontend](../../api/query/graphql.html):
+Query with filter using [HTTP GraphQL frontend](../../api/query/graphql.html):
 
 ```
 $ curl -s -X POST localhost:8080/api/graphql --data-binary @- <<EOF | jq
@@ -101,22 +131,22 @@ query {
     Address
     Bed
     Bath
+    Monthly_Rent
   }
 }
 EOF
-
 [
-  {
-    "Address": "Kenmore, WA",
-    "Bed": 4,
-    "Bath": 3,
-    "Monthly_Rent": "$4,000"
-  },
   {
     "Address": "Fremont, WA",
     "Bed": 5,
     "Bath": 3,
     "Monthly_Rent": "$4,500"
+  },
+  {
+    "Address": "Kenmore, WA",
+    "Bed": 4,
+    "Bath": 3,
+    "Monthly_Rent": "$4,000"
   }
 ]
 ```
