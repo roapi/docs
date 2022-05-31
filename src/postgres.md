@@ -1,9 +1,9 @@
 # Postgres wire protocol
 
-ROAPI uses the [convergenc](https://github.com/returnString/convergence) Rust
+ROAPI uses the [convergence](https://github.com/returnString/convergence) Rust
 crate to read and write Postgres wire protocol. This means you will be able to
 query all tables loaded in ROAPI using any Postgres Clients as if ROAPI is a
-real Postgres Database!
+real Postgres database!
 
 By default, ROAPI listens for Postgres traffic on address `127.0.0.1:5432`, but
 you can change it using the `--addr-postgres` command line argument or add the
