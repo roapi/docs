@@ -1,8 +1,8 @@
 # Xlsx(Microsoft Excel)
 
-Thanks to [calamine](https://github.com/tafia/calamine) crate, ROAPI supports the `.xlsx` file.
-
 To load the `.xlsx`, `sheet_name` needs to be specified in a config.
+
+By default, most `.xlsx` files initially use Sheet1 as the `sheet_name`. Be sure to change this sheet_name as needed if your spreadsheet uses a different sheet_name.
 
 Ex) Sheet1
 
