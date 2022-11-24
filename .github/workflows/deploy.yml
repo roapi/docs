@@ -22,7 +22,7 @@ jobs:
       # https://github.com/badboy/mdbook-open-on-gh/pull/3 gets released
       - uses: actions-rs/toolchain@v1
         with:
-          toolchain: 1.64.0
+          toolchain: 1.63.0
       - name: Install mdbook-open-on-gh
         run: |
           cargo install --locked --git https://github.com/houqp/mdbook-open-on-gh --branch main
