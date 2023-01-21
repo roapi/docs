@@ -6,6 +6,7 @@ ROAPI currently supports the following blob storages:
 * HTTP/HTTPS
 * S3
 * GCS
+* Azure Storage
 
 ## Filesystem
 
@@ -85,3 +86,32 @@ environment variables if you are using service accont:
 * `GOOGLE_SERVICE_ACCOUNT`
 
 Note that GCP Workload Identity is NOT supported yet, blocked by [https://github.com/apache/arrow-rs/issues/3490](https://github.com/apache/arrow-rs/issues/3490).
+
+## Azure Storage
+
+ROAPI can build tables from datasets hosted in Azure Storage. Configuration is
+similar to filesystem store:
+
+```yaml
+tables:
+  - name: "TABLE_NAME"
+    uri: "az://BUCKET/TABLE/KEY"
+    option:
+        format: "csv"
+```
+
+The supported url schemas are
+* `abfs[s]://<container>/<path>`
+* `az://<container>/<path>`
+* `adl://<container>/<path>`
+* `azure://<container>/<path>`
+
+To configure Azure credentials, you can set the following
+environment variables:
+
+* `AZURE_STORAGE_ACCOUNT_NAME`
+* `AZURE_STORAGE_ACCOUNT_KEY`
+* `AZURE_STORAGE_CLIENT_ID`
+* `AZURE_STORAGE_TENANT_ID`
+* `AZURE_STORAGE_SAS_KEY`
+* `AZURE_STORAGE_TOKEN`
