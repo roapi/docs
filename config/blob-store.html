@@ -186,6 +186,7 @@
 <li>Filesystem</li>
 <li>HTTP/HTTPS</li>
 <li>S3</li>
+<li>GCS</li>
 </ul>
 <h2 id="filesystem"><a class="header" href="#filesystem">Filesystem</a></h2>
 <p>Filesystem store can be specified using <code>file:</code> or <code>filesystem:</code> schemes.  In a
@@ -229,6 +230,21 @@ environment variables if you are using IAM user:</p>
 <li><code>AWS_SECRET_ACCESS_KEY</code></li>
 <li><code>AWS_ACCESS_KEY_ID</code></li>
 </ul>
+<h2 id="gcs"><a class="header" href="#gcs">GCS</a></h2>
+<p>ROAPI can build tables from datasets hosted in GCS buckets. Configuration is
+similar to filesystem store:</p>
+<pre><code class="language-yaml">tables:
+  - name: &quot;TABLE_NAME&quot;
+    uri: &quot;gs://BUCKET/TABLE/KEY&quot;
+    option:
+        format: &quot;csv&quot;
+</code></pre>
+<p>To configure GCS credentials, you can set the following
+environment variables if you are using service accont:</p>
+<ul>
+<li><code>GOOGLE_SERVICE_ACCOUNT</code></li>
+</ul>
+<p>Note that GCP Workload Identity is NOT supported yet, blocked by <a href="https://github.com/apache/arrow-rs/issues/3490">https://github.com/apache/arrow-rs/issues/3490</a>.</p>
 <footer id="open-on-gh">Found a bug? <a href="https://github.com/roapi/docs/edit/main/src/config/blob-store.md">Edit this file on GitHub.</a></footer>
                     </main>
 
