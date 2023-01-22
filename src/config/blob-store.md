@@ -5,6 +5,7 @@ ROAPI currently supports the following blob storages:
 * Filesystem
 * HTTP/HTTPS
 * S3
+* GCS
 
 ## Filesystem
 
@@ -64,3 +65,23 @@ environment variables if you are using IAM user:
 
 * `AWS_SECRET_ACCESS_KEY`
 * `AWS_ACCESS_KEY_ID`
+
+## GCS
+
+ROAPI can build tables from datasets hosted in GCS buckets. Configuration is
+similar to filesystem store:
+
+```yaml
+tables:
+  - name: "TABLE_NAME"
+    uri: "gs://BUCKET/TABLE/KEY"
+    option:
+        format: "csv"
+```
+
+To configure GCS credentials, you can set the following
+environment variables if you are using service accont:
+
+* `GOOGLE_SERVICE_ACCOUNT`
+
+Note that GCP Workload Identity is NOT supported yet, blocked by [https://github.com/apache/arrow-rs/issues/3490](https://github.com/apache/arrow-rs/issues/3490).
