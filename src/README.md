@@ -17,7 +17,7 @@ automatic schema inference.
 various formats requested by client.
 
 Its pluggable query core design makes it possible for users to efficiently
-perform join queries acorss a diverse set of datasources from simple
+perform join queries across a diverse set of datasources from simple
 CSV/Parquet files in Data warehouses, to MySQL/Postgres, to SASS like Google
 spreadsheet.
 
