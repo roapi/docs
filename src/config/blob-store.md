@@ -83,9 +83,11 @@ tables:
 To configure GCS credentials, you can set the following
 environment variables if you are using service accont:
 
-* `GOOGLE_SERVICE_ACCOUNT`
-
-Note that GCP Workload Identity is NOT supported yet, blocked by [https://github.com/apache/arrow-rs/issues/3490](https://github.com/apache/arrow-rs/issues/3490).
+* `GOOGLE_SERVICE_ACCOUNT` / `GOOGLE_SERVICE_ACCOUNT_PATH`: location of service account file
+* `GOOGLE_SERVICE_ACCOUNT_KEY`: JSON serialized service account key
+* `GOOGLE_APPLICATION_CREDENTIALS`: set by gcloud SDK
+* [Google Compute Engine Service Account](https://cloud.google.com/compute/docs/access/service-accounts#associating_a_service_account_to_an_instance)
+* [GKE Workload Identity](https://cloud.google.com/kubernetes-engine/docs/concepts/workload-identity)
 
 ## Azure Storage
 
@@ -115,3 +117,7 @@ environment variables:
 * `AZURE_STORAGE_TENANT_ID`
 * `AZURE_STORAGE_SAS_KEY`
 * `AZURE_STORAGE_TOKEN`
+* `AZURE_MSI_ENDPOINT` / `AZURE_IDENTITY_ENDPOINT`: Endpoint to request a imds managed identity token
+* `AZURE_OBJECT_ID`: Object id for use with managed identity authentication
+* `AZURE_MSI_RESOURCE_ID`: Msi resource id for use with managed identity authentication
+* `AZURE_FEDERATED_TOKEN_FILE`: File containing token for Azure AD workload identity federation
