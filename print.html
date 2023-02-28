@@ -771,9 +771,12 @@ similar to filesystem store:</p>
 <p>To configure GCS credentials, you can set the following
 environment variables if you are using service accont:</p>
 <ul>
-<li><code>GOOGLE_SERVICE_ACCOUNT</code></li>
+<li><code>GOOGLE_SERVICE_ACCOUNT</code> / <code>GOOGLE_SERVICE_ACCOUNT_PATH</code>: location of service account file</li>
+<li><code>GOOGLE_SERVICE_ACCOUNT_KEY</code>: JSON serialized service account key</li>
+<li><code>GOOGLE_APPLICATION_CREDENTIALS</code>: set by gcloud SDK</li>
+<li><a href="https://cloud.google.com/compute/docs/access/service-accounts#associating_a_service_account_to_an_instance">Google Compute Engine Service Account</a></li>
+<li><a href="https://cloud.google.com/kubernetes-engine/docs/concepts/workload-identity">GKE Workload Identity</a></li>
 </ul>
-<p>Note that GCP Workload Identity is NOT supported yet, blocked by <a href="https://github.com/apache/arrow-rs/issues/3490">https://github.com/apache/arrow-rs/issues/3490</a>.</p>
 <h2 id="azure-storage"><a class="header" href="#azure-storage">Azure Storage</a></h2>
 <p>ROAPI can build tables from datasets hosted in Azure Storage. Configuration is
 similar to filesystem store:</p>
@@ -799,6 +802,10 @@ environment variables:</p>
 <li><code>AZURE_STORAGE_TENANT_ID</code></li>
 <li><code>AZURE_STORAGE_SAS_KEY</code></li>
 <li><code>AZURE_STORAGE_TOKEN</code></li>
+<li><code>AZURE_MSI_ENDPOINT</code> / <code>AZURE_IDENTITY_ENDPOINT</code>: Endpoint to request a imds managed identity token</li>
+<li><code>AZURE_OBJECT_ID</code>: Object id for use with managed identity authentication</li>
+<li><code>AZURE_MSI_RESOURCE_ID</code>: Msi resource id for use with managed identity authentication</li>
+<li><code>AZURE_FEDERATED_TOKEN_FILE</code>: File containing token for Azure AD workload identity federation</li>
 </ul>
 <footer id="open-on-gh">Found a bug? <a href="https://github.com/roapi/docs/edit/main/src/config/blob-store.md">Edit this file on GitHub.</a></footer><h1 id="databases"><a class="header" href="#databases">Databases</a></h1>
 <p>Thanks to the <a href="https://github.com/sfu-db/connector-x">connector-x</a> Rust crate,
