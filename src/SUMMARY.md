@@ -14,7 +14,7 @@
         - [NDJSON](config/dataset-formats/ndjson.md)
         - [Delta Lake](config/dataset-formats/delta.md)
         - [Arrow](config/dataset-formats/arrow.md)
-        - [Xlsx](config/dataset-formats/xlsx.md)
+        - [MS Excel compatible formats](config/dataset-formats/excel.md)
     - [Blob store](./config/blob-store.md)
     - [Databases](./config/databases.md)
 - [Postgres wire protocol](postgres.md)
