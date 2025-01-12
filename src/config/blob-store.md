@@ -12,7 +12,7 @@ ROAPI currently supports the following blob storages:
 
 Filesystem store can be specified using `file:` or `filesystem:` schemes.  In a
 Windows environment, the scheme is mandatory.  On Unix systems, a uri without a
-scheme prefix is treated as filesystem backed data source by ROAPI. 
+scheme prefix is treated as filesystem backed data source by ROAPI.
 
 For example, to serve a local parquet file `test_data/blogs.parquet`, you can
 just set the uri to the file path:
@@ -42,8 +42,19 @@ tables:
 
 ROAPI can build tables from datasets served through HTTP protocols. However, one
 thing to keep in mind is HTTP store doesn't support partitioned datasets because
-there is no native directory support in HTTP protocol.
+there is no native directory listing support in the HTTP protocol.
 
+To set custom headers for HTTP requests, you can use the `headers` io option:
+
+```yaml
+tables:
+  - name: "TABLE_NAME"
+    uri: "http://BUCKET/TABLE/KEY.csv"
+    io_option:
+      headers:
+        'Content-Type': 'application/json'
+        Authorization: 'Bearer TOKEN'
+```
 
 ## S3
 

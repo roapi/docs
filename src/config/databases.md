@@ -15,3 +15,17 @@ tables:
 ```
 
 With this, you can now write a single SQL query to join tables between MySQL, SQLite and local CSV files!
+
+By default, ROAPI will use the provided table name as the table name to extract
+data from the database. If you want to expose a specific database table with a
+different name, you can use the `option` field to specify the original table
+name like below:
+
+```yaml
+tables:
+  - name: custom_table_name
+    uri: "sqlite://path/to/sqlitelite/file"
+    option:
+      table: original_table_name
+      format: sqlite
+```
