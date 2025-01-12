@@ -11,23 +11,12 @@ jobs:
       - name: Checkout 🛎️
         uses: actions/checkout@v2
 
-      # - name: Install mdbook
-      #   run: |
-      #     curl -sL https://github.com/rust-lang/mdBook/releases/download/v0.4.7/mdbook-v0.4.7-x86_64-unknown-linux-gnu.tar.gz | tar xzv
-      #
-      # - name: Install mdbook-open-on-gh
-      #   run: |
-      #     curl -sL https://github.com/badboy/mdbook-open-on-gh/releases/download/2.0.0/mdbook-open-on-gh-2.0.0-x86_64-unknown-linux-gnu.tar.gz | tar zxv
-      # TODO: switch back to download from release after
-      # https://github.com/badboy/mdbook-open-on-gh/pull/3 gets released
-      - uses: actions-rs/toolchain@v1
-        with:
-          toolchain: 1.63.0
+      - name: Install mdbook
+        run: |
+          curl -sSL https://github.com/rust-lang/mdBook/releases/download/v0.4.43/mdbook-v0.4.43-x86_64-unknown-linux-gnu.tar.gz | tar -xzv
       - name: Install mdbook-open-on-gh
         run: |
-          cargo install --locked --git https://github.com/houqp/mdbook-open-on-gh --branch main
-          cargo install --locked --git https://github.com/houqp/mdBook --branch ga mdbook
-
+          curl -sL https://github.com/badboy/mdbook-open-on-gh/releases/download/2.4.3/mdbook-open-on-gh-2.4.3-x86_64-unknown-linux-musl.tar.gz | tar zxv
       - name: Build
         run: |
           export PATH=$PATH:$(pwd)
