@@ -1,42 +1,40 @@
 <!DOCTYPE HTML>
-<html lang="en" class="sidebar-visible no-js light">
+<html lang="en" class="light sidebar-visible" dir="ltr">
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
         <title>ROAPI Documentation</title>
-        
-        <meta name="robots" content="noindex" />
-        
-        
+        <meta name="robots" content="noindex">
 
 
         <!-- Custom HTML head -->
-        
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-4GB4QQGXTJ"></script>
+        <script>
+            var localAddrs = ["localhost", "127.0.0.1", ""];
+            // Make sure we don't activate Google Analytics if the developer is inspecting the book locally...
+            if (localAddrs.indexOf(document.location.hostname) === -1) {
+                window.dataLayer = window.dataLayer || [];
+                function gtag() { dataLayer.push(arguments); }
+                gtag('js', new Date());
+                gtag('config', 'G-4GB4QQGXTJ');
+            }
+        </script>
 
-
-        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta name="theme-color" content="#ffffff" />
+        <meta name="theme-color" content="#ffffff">
 
-        
         <link rel="icon" href="favicon.svg">
-        
-        
         <link rel="shortcut icon" href="favicon.png">
-        
         <link rel="stylesheet" href="css/variables.css">
         <link rel="stylesheet" href="css/general.css">
         <link rel="stylesheet" href="css/chrome.css">
-        
         <link rel="stylesheet" href="css/print.css" media="print">
-        
 
         <!-- Fonts -->
         <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
-        
         <link rel="stylesheet" href="fonts/fonts.css">
-        
 
         <!-- Highlight.js Stylesheets -->
         <link rel="stylesheet" href="highlight.css">
@@ -44,32 +42,21 @@
         <link rel="stylesheet" href="ayu-highlight.css">
 
         <!-- Custom theme stylesheets -->
-        
         <link rel="stylesheet" href="open-in-gh.css">
-        
 
-        
 
-        
-        <!-- Global site tag (gtag.js) - Google Analytics -->
-        <script async src="https://www.googletagmanager.com/gtag/js?id=G-4GB4QQGXTJ"></script>
-        <script>
-          window.dataLayer = window.dataLayer || [];
-          function gtag(){dataLayer.push(arguments);}
-          gtag('js', new Date());
-          gtag('config', 'G-4GB4QQGXTJ');
-        </script>
-        
-    </head>
-    <body>
         <!-- Provide site root to javascript -->
-        <script type="text/javascript">
+        <script>
             var path_to_root = "";
             var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
         </script>
-
+        <!-- Start loading toc.js asap -->
+        <script src="toc.js"></script>
+    </head>
+    <body>
+    <div id="body-container">
         <!-- Work around some values being stored in localStorage wrapped in quotes -->
-        <script type="text/javascript">
+        <script>
             try {
                 var theme = localStorage.getItem('mdbook-theme');
                 var sidebar = localStorage.getItem('mdbook-sidebar');
@@ -85,83 +72,84 @@
         </script>
 
         <!-- Set the theme before any content is loaded, prevents flash -->
-        <script type="text/javascript">
+        <script>
             var theme;
             try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
             if (theme === null || theme === undefined) { theme = default_theme; }
-            var html = document.querySelector('html');
-            html.classList.remove('no-js')
+            const html = document.documentElement;
             html.classList.remove('light')
             html.classList.add(theme);
-            html.classList.add('js');
+            html.classList.add("js");
         </script>
 
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
         <!-- Hide / unhide sidebar before it is displayed -->
-        <script type="text/javascript">
-            var html = document.querySelector('html');
-            var sidebar = 'hidden';
+        <script>
+            var sidebar = null;
+            var sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
             if (document.body.clientWidth >= 1080) {
                 try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
                 sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
             }
+            sidebar_toggle.checked = sidebar === 'visible';
             html.classList.remove('sidebar-visible');
             html.classList.add("sidebar-" + sidebar);
         </script>
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
-            <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded "><a href="index.html"><strong aria-hidden="true">1.</strong> Overview</a></li><li class="chapter-item expanded "><a href="installation.html"><strong aria-hidden="true">2.</strong> Installation</a></li><li class="chapter-item expanded "><a href="quickstart.html"><strong aria-hidden="true">3.</strong> Quick start</a></li><li class="chapter-item expanded "><a href="config/index.html"><strong aria-hidden="true">4.</strong> Config</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="config/cli.html"><strong aria-hidden="true">4.1.</strong> Command line argument</a></li><li class="chapter-item expanded "><a href="config/config-file.html"><strong aria-hidden="true">4.2.</strong> YAML config</a></li><li class="chapter-item expanded "><a href="config/dataset-formats/index.html"><strong aria-hidden="true">4.3.</strong> Dataset formats</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="config/dataset-formats/json.html"><strong aria-hidden="true">4.3.1.</strong> JSON</a></li><li class="chapter-item expanded "><a href="config/dataset-formats/parquet.html"><strong aria-hidden="true">4.3.2.</strong> Parquet</a></li><li class="chapter-item expanded "><a href="config/dataset-formats/csv.html"><strong aria-hidden="true">4.3.3.</strong> CSV</a></li><li class="chapter-item expanded "><a href="config/dataset-formats/gsheet.html"><strong aria-hidden="true">4.3.4.</strong> Google spreadsheet</a></li><li class="chapter-item expanded "><a href="config/dataset-formats/ndjson.html"><strong aria-hidden="true">4.3.5.</strong> NDJSON</a></li><li class="chapter-item expanded "><a href="config/dataset-formats/delta.html"><strong aria-hidden="true">4.3.6.</strong> Delta Lake</a></li><li class="chapter-item expanded "><a href="config/dataset-formats/arrow.html"><strong aria-hidden="true">4.3.7.</strong> Arrow</a></li><li class="chapter-item expanded "><a href="config/dataset-formats/xlsx.html"><strong aria-hidden="true">4.3.8.</strong> Xlsx</a></li></ol></li><li class="chapter-item expanded "><a href="config/blob-store.html"><strong aria-hidden="true">4.4.</strong> Blob store</a></li><li class="chapter-item expanded "><a href="config/databases.html"><strong aria-hidden="true">4.5.</strong> Databases</a></li></ol></li><li class="chapter-item expanded "><a href="postgres.html"><strong aria-hidden="true">5.</strong> Postgres wire protocol</a></li><li class="chapter-item expanded "><a href="api/index.html"><strong aria-hidden="true">6.</strong> HTTP API</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="api/query/index.html"><strong aria-hidden="true">6.1.</strong> Query frontends</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="api/query/sql.html"><strong aria-hidden="true">6.1.1.</strong> SQL</a></li><li class="chapter-item expanded "><a href="api/query/rest.html"><strong aria-hidden="true">6.1.2.</strong> REST</a></li><li class="chapter-item expanded "><a href="api/query/graphql.html"><strong aria-hidden="true">6.1.3.</strong> GraphQL</a></li><li class="chapter-item expanded "><a href="api/query/kv.html"><strong aria-hidden="true">6.1.4.</strong> Key value lookup</a></li></ol></li><li class="chapter-item expanded "><a href="api/schema.html"><strong aria-hidden="true">6.2.</strong> Schema</a></li><li class="chapter-item expanded "><a href="api/response.html"><strong aria-hidden="true">6.3.</strong> Response serialization</a></li></ol></li></ol>
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="toc.html"></iframe>
+            </noscript>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
             </div>
-            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
 
         <div id="page-wrapper" class="page-wrapper">
 
             <div class="page">
-                
                 <div id="menu-bar-hover-placeholder"></div>
-                <div id="menu-bar" class="menu-bar sticky bordered">
+                <div id="menu-bar" class="menu-bar sticky">
                     <div class="left-buttons">
-                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
                             <i class="fa fa-bars"></i>
-                        </button>
+                        </label>
                         <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
                             <i class="fa fa-paint-brush"></i>
                         </button>
                         <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
-                            <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
                             <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
                             <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
                             <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
                             <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
                         </ul>
-                        
                         <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
                             <i class="fa fa-search"></i>
                         </button>
-                        
                     </div>
 
                     <h1 class="menu-title">ROAPI Documentation</h1>
 
                     <div class="right-buttons">
-                        
                         <a href="print.html" title="Print this book" aria-label="Print this book">
                             <i id="print-button" class="fa fa-print"></i>
                         </a>
-                        
-                        
                         <a href="https://github.com/roapi/docs" title="Git repository" aria-label="Git repository">
                             <i id="git-repository-button" class="fa fa-github"></i>
                         </a>
-                        
+
                     </div>
                 </div>
 
-                
                 <div id="search-wrapper" class="hidden">
                     <form id="searchbar-outer" class="searchbar-outer">
-                        <input type="search" name="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
                     </form>
                     <div id="searchresults-outer" class="searchresults-outer hidden">
                         <div id="searchresults-header" class="searchresults-header"></div>
@@ -169,10 +157,9 @@
                         </ul>
                     </div>
                 </div>
-                
 
                 <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
-                <script type="text/javascript">
+                <script>
                     document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
                     document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
                     Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
@@ -207,7 +194,7 @@ spreadsheet.</p>
 <blockquote>
 <p>If you'd like to share feedback on how you're using ROAPI, please <a href="https://docs.google.com/forms/d/1M1s1scZX39UouuVF8WzIFQoSyeKX5dMVQgQMtYJKGZU">fill out this survey</a>. Thanks!</p>
 </blockquote>
-<footer id="open-on-gh">Found a bug? <a href="https://github.com/roapi/docs/edit/main/src/README.md">Edit this file on GitHub.</a></footer><h1 id="installation"><a class="header" href="#installation">Installation</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="installation"><a class="header" href="#installation">Installation</a></h1>
 <h2 id="pre-built-binary"><a class="header" href="#pre-built-binary">Pre-built binary</a></h2>
 <p>Platform specific pre-built binaries for each release are hosted on our <a href="https://github.com/roapi/roapi/releases">Github
 release page</a>.</p>
@@ -225,35 +212,35 @@ release page</a>.</p>
 <p>You need to install <a href="https://rustup.rs/">Rust toolchain</a> if you haven't done so.</p>
 <pre><code class="language-bash">cargo install --locked --git https://github.com/roapi/roapi --branch main --bins roapi
 </code></pre>
-<footer id="open-on-gh">Found a bug? <a href="https://github.com/roapi/docs/edit/main/src/installation.md">Edit this file on GitHub.</a></footer><h1 id="quick-start"><a class="header" href="#quick-start">Quick start</a></h1>
+<footer id="open-on-gh">Found a bug? <a href="https://github.com/roapi/docs/edit/main/src/installation.md">Edit this page on GitHub.</a></footer><div style="break-before: page; page-break-before: always;"></div><h1 id="quick-start"><a class="header" href="#quick-start">Quick start</a></h1>
 <p>Spin up APIs for <code>test_data/uk_cities_with_headers.csv</code> and
 <code>test_data/spacex-launches.json</code>:</p>
 <pre><code class="language-bash">roapi \
-    --table &quot;uk_cities=test_data/uk_cities_with_headers.csv&quot; \
-    --table &quot;test_data/spacex_launches.json&quot;
+    --table "uk_cities=test_data/uk_cities_with_headers.csv" \
+    --table "test_data/spacex_launches.json"
 </code></pre>
 <p>Or using prebuilt docker image:</p>
 <pre><code>docker run -t --rm -p 8080:8080 ghcr.io/roapi/roapi:latest --addr-http 0.0.0.0:8080 \
-    --table &quot;uk_cities=test_data/uk_cities_with_headers.csv&quot; \
-    --table &quot;test_data/spacex_launches.json&quot;
+    --table "uk_cities=test_data/uk_cities_with_headers.csv" \
+    --table "test_data/spacex_launches.json"
 </code></pre>
 <h2 id="query-api"><a class="header" href="#query-api">Query API</a></h2>
 <p>Query tables using SQL, GraphQL or REST:</p>
-<pre><code class="language-bash">curl -X POST -d &quot;SELECT city, lat, lng FROM uk_cities LIMIT 2&quot; localhost:8080/api/sql
-curl -X POST -d &quot;query { uk_cities(limit: 2) {city, lat, lng} }&quot; localhost:8080/api/graphql
-curl &quot;localhost:8080/api/tables/uk_cities?columns=city,lat,lng&amp;limit=2&quot;
+<pre><code class="language-bash">curl -X POST -d "SELECT city, lat, lng FROM uk_cities LIMIT 2" localhost:8080/api/sql
+curl -X POST -d "query { uk_cities(limit: 2) {city, lat, lng} }" localhost:8080/api/graphql
+curl "localhost:8080/api/tables/uk_cities?columns=city,lat,lng&amp;limit=2"
 </code></pre>
 <p>Sample response:</p>
 <pre><code class="language-json">[
   {
-    &quot;city&quot;: &quot;Elgin, Scotland, the UK&quot;,
-    &quot;lat&quot;: 57.653484,
-    &quot;lng&quot;: -3.335724
+    "city": "Elgin, Scotland, the UK",
+    "lat": 57.653484,
+    "lng": -3.335724
   },
   {
-    &quot;city&quot;: &quot;Stoke-on-Trent, Staffordshire, the UK&quot;,
-    &quot;lat&quot;: 53.002666,
-    &quot;lng&quot;: -2.179404
+    "city": "Stoke-on-Trent, Staffordshire, the UK",
+    "lat": 53.002666,
+    "lng": -2.179404
   }
 ]
 </code></pre>
@@ -265,35 +252,35 @@ by each frontend.</p>
 </code></pre>
 <p>Sample response:</p>
 <pre><code class="language-json">{
-  &quot;uk_cities&quot;: {
-    &quot;fields&quot;: [
+  "uk_cities": {
+    "fields": [
       {
-        &quot;name&quot;: &quot;city&quot;,
-        &quot;data_type&quot;: &quot;Utf8&quot;,
-        &quot;nullable&quot;: false,
-        &quot;dict_id&quot;: 0,
-        &quot;dict_is_ordered&quot;: false
+        "name": "city",
+        "data_type": "Utf8",
+        "nullable": false,
+        "dict_id": 0,
+        "dict_is_ordered": false
       },
       {
-        &quot;name&quot;: &quot;lat&quot;,
-        &quot;data_type&quot;: &quot;Float64&quot;,
-        &quot;nullable&quot;: false,
-        &quot;dict_id&quot;: 0,
-        &quot;dict_is_ordered&quot;: false
+        "name": "lat",
+        "data_type": "Float64",
+        "nullable": false,
+        "dict_id": 0,
+        "dict_is_ordered": false
       },
       {
-        &quot;name&quot;: &quot;lng&quot;,
-        &quot;data_type&quot;: &quot;Float64&quot;,
-        &quot;nullable&quot;: false,
-        &quot;dict_id&quot;: 0,
-        &quot;dict_is_ordered&quot;: false
+        "name": "lng",
+        "data_type": "Float64",
+        "nullable": false,
+        "dict_id": 0,
+        "dict_is_ordered": false
       }
     ]
   }
 }
 </code></pre>
-<footer id="open-on-gh">Found a bug? <a href="https://github.com/roapi/docs/edit/main/src/quickstart.md">Edit this file on GitHub.</a></footer><h1 id="config"><a class="header" href="#config">Config</a></h1>
-<footer id="open-on-gh">Found a bug? <a href="https://github.com/roapi/docs/edit/main/src/config/README.md">Edit this file on GitHub.</a></footer><h1 id="command-line-argument"><a class="header" href="#command-line-argument">Command line argument</a></h1>
+<footer id="open-on-gh">Found a bug? <a href="https://github.com/roapi/docs/edit/main/src/quickstart.md">Edit this page on GitHub.</a></footer><div style="break-before: page; page-break-before: always;"></div><h1 id="config"><a class="header" href="#config">Config</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="command-line-argument"><a class="header" href="#command-line-argument">Command line argument</a></h1>
 <p>You can configure ROAPI to load as many tables as you want by repeating the <code>--table</code> argument:</p>
 <pre><code>roapi --table 'table1_name=table1_uri' --table 'table2_name=table2_uri'
 </code></pre>
@@ -333,7 +320,7 @@ OPTIONS:
     -V, --version
             Print version information
 </code></pre>
-<footer id="open-on-gh">Found a bug? <a href="https://github.com/roapi/docs/edit/main/src/config/cli.md">Edit this file on GitHub.</a></footer><h1 id="yaml-config"><a class="header" href="#yaml-config">YAML config</a></h1>
+<footer id="open-on-gh">Found a bug? <a href="https://github.com/roapi/docs/edit/main/src/config/cli.md">Edit this page on GitHub.</a></footer><div style="break-before: page; page-break-before: always;"></div><h1 id="yaml-config"><a class="header" href="#yaml-config">YAML config</a></h1>
 <h2 id="tables"><a class="header" href="#tables">Tables</a></h2>
 <p>You can configure multiple table sources using YAML config, which supports more
 advanced format specific table options. For example:</p>
@@ -343,48 +330,48 @@ advanced format specific table options. For example:</p>
   # binding address for TCP port that speaks Postgres wire protocol
   postgres: 0.0.0.0:5432
 tables:
-  - name: &quot;blogs&quot;
-    uri: &quot;test_data/blogs.parquet&quot;
+  - name: "blogs"
+    uri: "test_data/blogs.parquet"
 
-  - name: &quot;ubuntu_ami&quot;
-    uri: &quot;test_data/ubuntu-ami.json&quot;
+  - name: "ubuntu_ami"
+    uri: "test_data/ubuntu-ami.json"
     option:
-      format: &quot;json&quot;
-      pointer: &quot;/aaData&quot;
+      format: "json"
+      pointer: "/aaData"
       array_encoded: true
     schema:
       columns:
-        - name: &quot;zone&quot;
-          data_type: &quot;Utf8&quot;
-        - name: &quot;name&quot;
-          data_type: &quot;Utf8&quot;
-        - name: &quot;version&quot;
-          data_type: &quot;Utf8&quot;
-        - name: &quot;arch&quot;
-          data_type: &quot;Utf8&quot;
-        - name: &quot;instance_type&quot;
-          data_type: &quot;Utf8&quot;
-        - name: &quot;release&quot;
-          data_type: &quot;Utf8&quot;
-        - name: &quot;ami_id&quot;
-          data_type: &quot;Utf8&quot;
-        - name: &quot;aki_id&quot;
-          data_type: &quot;Utf8&quot;
+        - name: "zone"
+          data_type: "Utf8"
+        - name: "name"
+          data_type: "Utf8"
+        - name: "version"
+          data_type: "Utf8"
+        - name: "arch"
+          data_type: "Utf8"
+        - name: "instance_type"
+          data_type: "Utf8"
+        - name: "release"
+          data_type: "Utf8"
+        - name: "ami_id"
+          data_type: "Utf8"
+        - name: "aki_id"
+          data_type: "Utf8"
 
-  - name: &quot;spacex_launches&quot;
-    uri: &quot;https://api.spacexdata.com/v4/launches&quot;
+  - name: "spacex_launches"
+    uri: "https://api.spacexdata.com/v4/launches"
     option:
-      format: &quot;json&quot;
+      format: "json"
 
-  - name: &quot;github_jobs&quot;
-    uri: &quot;https://web.archive.org/web/20210507025928if_/https://jobs.github.com/positions.json&quot;
+  - name: "github_jobs"
+    uri: "https://web.archive.org/web/20210507025928if_/https://jobs.github.com/positions.json"
 </code></pre>
 <h2 id="key-value-stores"><a class="header" href="#key-value-stores">Key value stores</a></h2>
 <p>Table sources can be loaded into in-memory key value stores if you specify which two
 columns to be used to load keys and values in the config:</p>
 <pre><code class="language-yaml">kvstores:
-  - name: &quot;spacex_launch_name&quot;
-    uri: &quot;test_data/spacex_launches.json&quot;
+  - name: "spacex_launch_name"
+    uri: "test_data/spacex_launches.json"
     key: id
     value: name
 </code></pre>
@@ -393,13 +380,13 @@ columns to be used to load keys and values in the config:</p>
 <p>Use <code>-c</code> argument to run ROAPI using a specific config file:</p>
 <pre><code class="language-bash">roapi -c ./roapi.yml
 </code></pre>
-<footer id="open-on-gh">Found a bug? <a href="https://github.com/roapi/docs/edit/main/src/config/config-file.md">Edit this file on GitHub.</a></footer><h1 id="dataset-formats"><a class="header" href="#dataset-formats">Dataset formats</a></h1>
-<footer id="open-on-gh">Found a bug? <a href="https://github.com/roapi/docs/edit/main/src/config/dataset-formats/README.md">Edit this file on GitHub.</a></footer><h1 id="json"><a class="header" href="#json">JSON</a></h1>
+<footer id="open-on-gh">Found a bug? <a href="https://github.com/roapi/docs/edit/main/src/config/config-file.md">Edit this page on GitHub.</a></footer><div style="break-before: page; page-break-before: always;"></div><h1 id="dataset-formats"><a class="header" href="#dataset-formats">Dataset formats</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="json"><a class="header" href="#json">JSON</a></h1>
 <p>When a table uri ends in <code>.json</code>, ROAPI will try to load it as JSON table if no
 <code>format</code> option is specified:</p>
 <pre><code class="language-yaml">tables:
-  - name: &quot;mytable&quot;
-    uri: &quot;http://mytable.json&quot;
+  - name: "mytable"
+    uri: "http://mytable.json"
 </code></pre>
 <h2 id="filter-by-json-pointer"><a class="header" href="#filter-by-json-pointer">Filter by JSON pointer</a></h2>
 <p>Sometimes the JSON array you want to serve might be stored inside a JSON
@@ -407,65 +394,65 @@ object. To support this use-case, ROAPI supports loading JSON using a <a href="h
 pointer</a>.</p>
 <p>Take the following JSON data as an example:</p>
 <pre><code class="language-json">{
-    &quot;x&quot;: {
-        &quot;y&quot;: [{&quot;col1&quot;: &quot;z&quot;}, {&quot;col1&quot;: &quot;zz&quot;}]
+    "x": {
+        "y": [{"col1": "z"}, {"col1": "zz"}]
     }
 }
 </code></pre>
-<p>In order to only serve <code>[{&quot;col1&quot;: &quot;z&quot;}, {&quot;col1&quot;: &quot;zz&quot;}]</code> through ROAPI, you can
+<p>In order to only serve <code>[{"col1": "z"}, {"col1": "zz"}]</code> through ROAPI, you can
 configure the JSON table source as:</p>
 <pre><code class="language-yaml">tables:
-  - name: &quot;mytable&quot;
-    uri: &quot;http://mytable.json&quot;
+  - name: "mytable"
+    uri: "http://mytable.json"
     option:
-      format: &quot;json&quot;
-      pointer: &quot;/x/y&quot;
+      format: "json"
+      pointer: "/x/y"
 </code></pre>
 <h2 id="array-encoding"><a class="header" href="#array-encoding">Array encoding</a></h2>
 <p>Each row in JSON data can be encoded using array for size reduction. This
 convention allows us to avoid repeating column names in every row.</p>
 <p>For example:</p>
 <pre><code class="language-json">[
-    {&quot;col1&quot;: 1, &quot;col2&quot;: &quot;abc&quot;},
-    {&quot;col1&quot;: 2, &quot;col2&quot;: &quot;efg&quot;}
+    {"col1": 1, "col2": "abc"},
+    {"col1": 2, "col2": "efg"}
 ]
 </code></pre>
 <p>Can be stored as:</p>
 <pre><code class="language-json">[
-    [1, &quot;abc&quot;],
-    [2, &quot;efg&quot;]
+    [1, "abc"],
+    [2, "efg"]
 ]
 </code></pre>
 <p>However, when loading JSON rows using array encoding, you must explicitly specify
 the schema, since there is no column name in the datasource anymore for ROAPI to
 perform the schema inference.</p>
 <pre><code class="language-yaml">tables:
-  - name: &quot;mytable&quot;
-    uri: &quot;http://mytable.json&quot;
+  - name: "mytable"
+    uri: "http://mytable.json"
     option:
-      format: &quot;json&quot;
+      format: "json"
       array_encoded: true
     schema:
       columns:
-        - name: &quot;col1&quot;
-          data_type: &quot;Int64&quot;
-        - name: &quot;col2&quot;
-          data_type: &quot;Utf8&quot;
+        - name: "col1"
+          data_type: "Int64"
+        - name: "col2"
+          data_type: "Utf8"
 </code></pre>
-<footer id="open-on-gh">Found a bug? <a href="https://github.com/roapi/docs/edit/main/src/config/dataset-formats/json.md">Edit this file on GitHub.</a></footer><h1 id="parquet"><a class="header" href="#parquet">Parquet</a></h1>
+<footer id="open-on-gh">Found a bug? <a href="https://github.com/roapi/docs/edit/main/src/config/dataset-formats/json.md">Edit this page on GitHub.</a></footer><div style="break-before: page; page-break-before: always;"></div><h1 id="parquet"><a class="header" href="#parquet">Parquet</a></h1>
 <p>When a table uri ends in <code>.parquet</code>, ROAPI will try to load it as Parquet table if no
 <code>format</code> option is specified:</p>
 <pre><code class="language-yaml">tables:
-  - name: &quot;mytable&quot;
-    uri: &quot;http://mytable.parquet&quot;
+  - name: "mytable"
+    uri: "http://mytable.parquet"
 </code></pre>
 <p>You can partition a Parquet dataset into multiple partitions and load all of them
 into a single table by directory path:</p>
 <pre><code class="language-yaml">tables:
-  - name: &quot;mytable&quot;
-    uri: &quot;./table_dir&quot;
+  - name: "mytable"
+    uri: "./table_dir"
     option:
-      format: &quot;parquet&quot;
+      format: "parquet"
 </code></pre>
 <h2 id="large-datasets"><a class="header" href="#large-datasets">Large Datasets</a></h2>
 <p>ROAPI loads the entire table into memory as the default behavior.  If your
@@ -480,30 +467,30 @@ to directly operate on the backing storage.</p>
 </ol>
 <p>Example:</p>
 <pre><code class="language-yaml">tables:
-  - name: &quot;mytable&quot;
-    uri: &quot;./table_dir&quot;
+  - name: "mytable"
+    uri: "./table_dir"
     option:
-      format: &quot;parquet&quot;
+      format: "parquet"
       use_memory_table: false
 </code></pre>
 <p>Note that when providing <code>use_memory_table</code> option, it becomes necessary to
 also specify the format.</p>
-<footer id="open-on-gh">Found a bug? <a href="https://github.com/roapi/docs/edit/main/src/config/dataset-formats/parquet.md">Edit this file on GitHub.</a></footer><h1 id="csv"><a class="header" href="#csv">CSV</a></h1>
+<footer id="open-on-gh">Found a bug? <a href="https://github.com/roapi/docs/edit/main/src/config/dataset-formats/parquet.md">Edit this page on GitHub.</a></footer><div style="break-before: page; page-break-before: always;"></div><h1 id="csv"><a class="header" href="#csv">CSV</a></h1>
 <p>When a table uri ends in <code>.csv</code>, ROAPI will try to load it as CSV table if no
 <code>format</code> option is specified:</p>
 <pre><code class="language-yaml">tables:
-  - name: &quot;mytable&quot;
-    uri: &quot;http://mytable.csv&quot;
+  - name: "mytable"
+    uri: "http://mytable.csv"
 </code></pre>
 <p>You can partition a CSV dataset into multiple partitions and load all of them
 into a single table by directory path:</p>
 <pre><code class="language-yaml">tables:
-  - name: &quot;mytable&quot;
-    uri: &quot;./table_dir&quot;
+  - name: "mytable"
+    uri: "./table_dir"
     option:
-      format: &quot;csv&quot;
+      format: "csv"
 </code></pre>
-<footer id="open-on-gh">Found a bug? <a href="https://github.com/roapi/docs/edit/main/src/config/dataset-formats/csv.md">Edit this file on GitHub.</a></footer><h1 id="google-spreadsheet"><a class="header" href="#google-spreadsheet">Google spreadsheet</a></h1>
+<footer id="open-on-gh">Found a bug? <a href="https://github.com/roapi/docs/edit/main/src/config/dataset-formats/csv.md">Edit this page on GitHub.</a></footer><div style="break-before: page; page-break-before: always;"></div><h1 id="google-spreadsheet"><a class="header" href="#google-spreadsheet">Google spreadsheet</a></h1>
 <p>To serve a Google spreadsheet as API, you need to gather the following config values:</p>
 <ul>
 <li>Google spreadsheet URL, usually in the form of <code>https://docs.google.com/spreadsheets/d/{SPREADSHEET_ID}#gid={SHEET_ID}</code>.</li>
@@ -523,13 +510,13 @@ account using the service account email. <img src="config/dataset-formats/../../
 </ol>
 <p>Now you can configure ROAPI to load the google spreadsheet into a table using:</p>
 <pre><code class="language-yaml">tables:
-  - name: &quot;table_name&quot;
-    uri: &quot;https://docs.google.com/spreadsheets/d/1-lc4oij04aXzFSRMwVBLjU76s-K0-s6UPc2biOvtuuU#gid=0&quot;
+  - name: "table_name"
+    uri: "https://docs.google.com/spreadsheets/d/1-lc4oij04aXzFSRMwVBLjU76s-K0-s6UPc2biOvtuuU#gid=0"
     option:
-      format: &quot;google_spreadsheet&quot;
-      application_secret_path: &quot;path/to/service_account_key.json&quot;
+      format: "google_spreadsheet"
+      application_secret_path: "path/to/service_account_key.json"
       # sheet_title is optional if `#gid` is specified in uri
-      sheet_title: &quot;sheet_name_within_google_spreadsheet&quot;
+      sheet_title: "sheet_name_within_google_spreadsheet"
 </code></pre>
 <p>ROAPI only invokes Google Sheets API during the initial data load, subsequent
 query requests are served using in memory data.</p>
@@ -549,9 +536,9 @@ with ROAPI.</p>
 psql (12.10 (Ubuntu 12.10-0ubuntu0.20.04.1), server 13)
 WARNING: psql major version 12, server major version 13.
          Some psql features might not work.
-Type &quot;help&quot; for help.
+Type "help" for help.
 
-houqp=&gt; select &quot;Address&quot;, &quot;Bed&quot;, &quot;Bath&quot;, &quot;Occupied&quot; from properties;
+houqp=&gt; select "Address", "Bed", "Bath", "Occupied" from properties;
      Address      | Bed | Bath | Occupied
 ------------------+-----+------+----------
  Bothell, WA      |   3 |    2 | f
@@ -573,31 +560,31 @@ houqp=&gt; select &quot;Address&quot;, &quot;Bed&quot;, &quot;Bath&quot;, &quot;
 </code></pre>
 <p>Query with aggregation using <a href="config/dataset-formats/../../api/query/sql.html">HTTP SQL frontend</a>:</p>
 <pre><code>$ curl -s -X POST localhost:8080/api/sql --data-binary @- &lt;&lt;EOF | jq
-SELECT DISTINCT(&quot;Landlord&quot;), COUNT(&quot;Address&quot;)
+SELECT DISTINCT("Landlord"), COUNT("Address")
 FROM properties
-GROUP BY &quot;Landlord&quot;
+GROUP BY "Landlord"
 EOF
 
 [
   {
-    &quot;Landlord&quot;: &quot;Carl&quot;,
-    &quot;COUNT(properties.Address)&quot;: 3
+    "Landlord": "Carl",
+    "COUNT(properties.Address)": 3
   },
   {
-    &quot;Landlord&quot;: &quot;Roger&quot;,
-    &quot;COUNT(properties.Address)&quot;: 3
+    "Landlord": "Roger",
+    "COUNT(properties.Address)": 3
   },
   {
-    &quot;Landlord&quot;: &quot;Mike&quot;,
-    &quot;COUNT(properties.Address)&quot;: 4
+    "Landlord": "Mike",
+    "COUNT(properties.Address)": 4
   },
   {
-    &quot;Landlord&quot;: &quot;Sam&quot;,
-    &quot;COUNT(properties.Address)&quot;: 2
+    "Landlord": "Sam",
+    "COUNT(properties.Address)": 2
   },
   {
-    &quot;Landlord&quot;: &quot;Daniel&quot;,
-    &quot;COUNT(properties.Address)&quot;: 3
+    "Landlord": "Daniel",
+    "COUNT(properties.Address)": 3
   }
 ]
 </code></pre>
@@ -610,7 +597,7 @@ query {
       Bath: { gte: 3 }
     }
     sort: [
-      { field: &quot;Bed&quot;, order: &quot;desc&quot; }
+      { field: "Bed", order: "desc" }
     ]
   ) {
     Address
@@ -622,42 +609,42 @@ query {
 EOF
 [
   {
-    &quot;Address&quot;: &quot;Fremont, WA&quot;,
-    &quot;Bed&quot;: 5,
-    &quot;Bath&quot;: 3,
-    &quot;Monthly_Rent&quot;: &quot;$4,500&quot;
+    "Address": "Fremont, WA",
+    "Bed": 5,
+    "Bath": 3,
+    "Monthly_Rent": "$4,500"
   },
   {
-    &quot;Address&quot;: &quot;Kenmore, WA&quot;,
-    &quot;Bed&quot;: 4,
-    &quot;Bath&quot;: 3,
-    &quot;Monthly_Rent&quot;: &quot;$4,000&quot;
+    "Address": "Kenmore, WA",
+    "Bed": 4,
+    "Bath": 3,
+    "Monthly_Rent": "$4,000"
   }
 ]
 </code></pre>
 <p>Note: when inferring table schema from Google spreadsheets, ROAPI automatically
 replaces spaces in column names with <code>_</code>(underscore).</p>
-<footer id="open-on-gh">Found a bug? <a href="https://github.com/roapi/docs/edit/main/src/config/dataset-formats/gsheet.md">Edit this file on GitHub.</a></footer><h1 id="ndjson"><a class="header" href="#ndjson">NDJSON</a></h1>
+<footer id="open-on-gh">Found a bug? <a href="https://github.com/roapi/docs/edit/main/src/config/dataset-formats/gsheet.md">Edit this page on GitHub.</a></footer><div style="break-before: page; page-break-before: always;"></div><h1 id="ndjson"><a class="header" href="#ndjson">NDJSON</a></h1>
 <p><a href="http://ndjson.org/">NDJSON</a> stands for Newline delimited JSON. It is a
 convenient format for storing or streaming structured data that may be
 processed one record at a time.</p>
 <p>When a table uri ends in <code>.ndjson</code>, ROAPI will try to load it as NDJSON table
 if no <code>format</code> option is specified:</p>
 <pre><code class="language-yaml">tables:
-  - name: &quot;mytable&quot;
-    uri: &quot;http://mytable.ndjson&quot;
+  - name: "mytable"
+    uri: "http://mytable.ndjson"
 </code></pre>
-<footer id="open-on-gh">Found a bug? <a href="https://github.com/roapi/docs/edit/main/src/config/dataset-formats/ndjson.md">Edit this file on GitHub.</a></footer><h1 id="delta-lake"><a class="header" href="#delta-lake">Delta Lake</a></h1>
+<footer id="open-on-gh">Found a bug? <a href="https://github.com/roapi/docs/edit/main/src/config/dataset-formats/ndjson.md">Edit this page on GitHub.</a></footer><div style="break-before: page; page-break-before: always;"></div><h1 id="delta-lake"><a class="header" href="#delta-lake">Delta Lake</a></h1>
 <p>ROAPI supports loading Delta tables from <a href="https://delta.io/">Delta Lake</a>
 through <a href="https://github.com/delta-io/delta-rs">delta-rs</a>. Since a Delta table
 doesn't have an extension suffix, ROAPI cannot infer table format from table
 URI alone.  Therefore, the <code>format</code> option needs to be set to <code>delta</code>
 explicitly for Delta table sources:</p>
 <pre><code class="language-yaml">tables:
-  - name: &quot;mytable&quot;
-    uri: &quot;s3://bucket/delta_table/path&quot;
+  - name: "mytable"
+    uri: "s3://bucket/delta_table/path"
     option:
-      format: &quot;delta&quot;
+      format: "delta"
 </code></pre>
 <h2 id="large-datasets-1"><a class="header" href="#large-datasets-1">Large Datasets</a></h2>
 <p>ROAPI loads the entire table into memory as the default behavior.  If your
@@ -672,43 +659,43 @@ to directly operate on the backing storage.</p>
 </ol>
 <p>Example:</p>
 <pre><code class="language-yaml">tables:
-  - name: &quot;mytable&quot;
-    uri: &quot;./path/to/delta_table&quot;
+  - name: "mytable"
+    uri: "./path/to/delta_table"
     option:
-      format: &quot;delta&quot;
+      format: "delta"
       use_memory_table: false
 </code></pre>
 <p>Note that when providing <code>use_memory_table</code> option, it becomes necessary to
 also specify the format.</p>
-<footer id="open-on-gh">Found a bug? <a href="https://github.com/roapi/docs/edit/main/src/config/dataset-formats/delta.md">Edit this file on GitHub.</a></footer><h1 id="arrow"><a class="header" href="#arrow">Arrow</a></h1>
+<footer id="open-on-gh">Found a bug? <a href="https://github.com/roapi/docs/edit/main/src/config/dataset-formats/delta.md">Edit this page on GitHub.</a></footer><div style="break-before: page; page-break-before: always;"></div><h1 id="arrow"><a class="header" href="#arrow">Arrow</a></h1>
 <p>When a table uri ends in <code>.arrow</code> or <code>.arrows</code>, ROAPI will try to load it as
 Arrow IPC file or stream if no <code>format</code> option is specified:</p>
 <pre><code class="language-yaml">tables:
-  - name: &quot;mytable&quot;
-    uri: &quot;http://mytable.arrow&quot; # or .arrows
+  - name: "mytable"
+    uri: "http://mytable.arrow" # or .arrows
 </code></pre>
 <p>You can partition an Arrow dataset into multiple partitions and load all of them
 into a single table by directory path:</p>
 <pre><code class="language-yaml">tables:
-  - name: &quot;mytable&quot;
-    uri: &quot;./table_dir&quot;
+  - name: "mytable"
+    uri: "./table_dir"
     option:
-      format: &quot;arrow&quot; # or arrows
+      format: "arrow" # or arrows
 </code></pre>
-<footer id="open-on-gh">Found a bug? <a href="https://github.com/roapi/docs/edit/main/src/config/dataset-formats/arrow.md">Edit this file on GitHub.</a></footer><h1 id="xlsxmicrosoft-excel"><a class="header" href="#xlsxmicrosoft-excel">Xlsx(Microsoft Excel)</a></h1>
+<footer id="open-on-gh">Found a bug? <a href="https://github.com/roapi/docs/edit/main/src/config/dataset-formats/arrow.md">Edit this page on GitHub.</a></footer><div style="break-before: page; page-break-before: always;"></div><h1 id="xlsxmicrosoft-excel"><a class="header" href="#xlsxmicrosoft-excel">Xlsx(Microsoft Excel)</a></h1>
 <p>To load the <code>.xlsx</code>, <code>sheet_name</code> needs to be specified in a config.</p>
 <p>By default, most <code>.xlsx</code> files initially use Sheet1 as the <code>sheet_name</code>. Be sure to change this sheet_name as needed if your spreadsheet uses a different sheet_name.</p>
 <p>Ex) Sheet1</p>
 <p><img src="config/dataset-formats/../../images/xlsx_sheet_name.png" alt="xlsx_sheet_name" /></p>
 <pre><code class="language-yaml">tables:
-    - name: &quot;excel_table&quot;
-      uri: &quot;path/to/file.xlsx&quot;
+    - name: "excel_table"
+      uri: "path/to/file.xlsx"
       option:
-        format: &quot;xlsx&quot;
-        sheet_name: &quot;Sheet1&quot;
+        format: "xlsx"
+        sheet_name: "Sheet1"
 </code></pre>
 <p>If no <code>sheet_name</code> is specified, ROAPI will throw the error.</p>
-<footer id="open-on-gh">Found a bug? <a href="https://github.com/roapi/docs/edit/main/src/config/dataset-formats/xlsx.md">Edit this file on GitHub.</a></footer><h1 id="blob-store"><a class="header" href="#blob-store">Blob store</a></h1>
+<footer id="open-on-gh">Found a bug? <a href="https://github.com/roapi/docs/edit/main/src/config/dataset-formats/xlsx.md">Edit this page on GitHub.</a></footer><div style="break-before: page; page-break-before: always;"></div><h1 id="blob-store"><a class="header" href="#blob-store">Blob store</a></h1>
 <p>ROAPI currently supports the following blob storages:</p>
 <ul>
 <li>Filesystem</li>
@@ -720,12 +707,12 @@ into a single table by directory path:</p>
 <h2 id="filesystem"><a class="header" href="#filesystem">Filesystem</a></h2>
 <p>Filesystem store can be specified using <code>file:</code> or <code>filesystem:</code> schemes.  In a
 Windows environment, the scheme is mandatory.  On Unix systems, a uri without a
-scheme prefix is treated as filesystem backed data source by ROAPI. </p>
+scheme prefix is treated as filesystem backed data source by ROAPI.</p>
 <p>For example, to serve a local parquet file <code>test_data/blogs.parquet</code>, you can
 just set the uri to the file path:</p>
 <pre><code class="language-yaml">tables:
-  - name: &quot;blogs&quot;
-    uri: &quot;test_data/blogs.parquet&quot;
+  - name: "blogs"
+    uri: "test_data/blogs.parquet"
 </code></pre>
 <p>Filesystem store supports loading partitioned tables. In other words, you can
 split up the table into mulitple files and load all of them into a single table
@@ -733,23 +720,32 @@ by setting uri to the directory path. When loading a partitioned dataset, you
 will need to manually specify table format since the uri will not contain table
 format as a suffix:</p>
 <pre><code class="language-yaml">tables:
-  - name: &quot;blogs&quot;
-    uri: &quot;test_data/blogs/&quot;
+  - name: "blogs"
+    uri: "test_data/blogs/"
     option:
-        format: &quot;parquet&quot;
+        format: "parquet"
 </code></pre>
 <h2 id="httphttps"><a class="header" href="#httphttps">HTTP/HTTPS</a></h2>
 <p>ROAPI can build tables from datasets served through HTTP protocols. However, one
 thing to keep in mind is HTTP store doesn't support partitioned datasets because
-there is no native directory support in HTTP protocol.</p>
+there is no native directory listing support in the HTTP protocol.</p>
+<p>To set custom headers for HTTP requests, you can use the <code>headers</code> io option:</p>
+<pre><code class="language-yaml">tables:
+  - name: "TABLE_NAME"
+    uri: "http://BUCKET/TABLE/KEY.csv"
+    io_option:
+      headers:
+        'Content-Type': 'application/json'
+        Authorization: 'Bearer TOKEN'
+</code></pre>
 <h2 id="s3"><a class="header" href="#s3">S3</a></h2>
 <p>ROAPI can build tables from datasets hosted in S3 buckets. Configuration is
 similar to filesystem store:</p>
 <pre><code class="language-yaml">tables:
-  - name: &quot;TABLE_NAME&quot;
-    uri: &quot;s3://BUCKET/TABLE/KEY&quot;
+  - name: "TABLE_NAME"
+    uri: "s3://BUCKET/TABLE/KEY"
     option:
-        format: &quot;csv&quot;
+        format: "csv"
 </code></pre>
 <p>Note that AWS region needs to be manually specified through <code>AWS_REGION</code>
 environment variable.</p>
@@ -763,10 +759,10 @@ environment variables if you are using IAM user:</p>
 <p>ROAPI can build tables from datasets hosted in GCS buckets. Configuration is
 similar to filesystem store:</p>
 <pre><code class="language-yaml">tables:
-  - name: &quot;TABLE_NAME&quot;
-    uri: &quot;gs://BUCKET/TABLE/KEY&quot;
+  - name: "TABLE_NAME"
+    uri: "gs://BUCKET/TABLE/KEY"
     option:
-        format: &quot;csv&quot;
+        format: "csv"
 </code></pre>
 <p>To configure GCS credentials, you can set the following
 environment variables if you are using service accont:</p>
@@ -781,10 +777,10 @@ environment variables if you are using service accont:</p>
 <p>ROAPI can build tables from datasets hosted in Azure Storage. Configuration is
 similar to filesystem store:</p>
 <pre><code class="language-yaml">tables:
-  - name: &quot;TABLE_NAME&quot;
-    uri: &quot;az://BUCKET/TABLE/KEY&quot;
+  - name: "TABLE_NAME"
+    uri: "az://BUCKET/TABLE/KEY"
     option:
-        format: &quot;csv&quot;
+        format: "csv"
 </code></pre>
 <p>The supported url schemas are</p>
 <ul>
@@ -807,20 +803,31 @@ environment variables:</p>
 <li><code>AZURE_MSI_RESOURCE_ID</code>: Msi resource id for use with managed identity authentication</li>
 <li><code>AZURE_FEDERATED_TOKEN_FILE</code>: File containing token for Azure AD workload identity federation</li>
 </ul>
-<footer id="open-on-gh">Found a bug? <a href="https://github.com/roapi/docs/edit/main/src/config/blob-store.md">Edit this file on GitHub.</a></footer><h1 id="databases"><a class="header" href="#databases">Databases</a></h1>
+<footer id="open-on-gh">Found a bug? <a href="https://github.com/roapi/docs/edit/main/src/config/blob-store.md">Edit this page on GitHub.</a></footer><div style="break-before: page; page-break-before: always;"></div><h1 id="databases"><a class="header" href="#databases">Databases</a></h1>
 <p>Thanks to the <a href="https://github.com/sfu-db/connector-x">connector-x</a> Rust crate,
 ROAPI is able to load tables from popular relational databases like MySQL,
 PostgreSQL and SQLite.</p>
 <pre><code class="language-yaml">tables:
-  - name: &quot;table_foo&quot;
-    uri: &quot;mysql://username:password@localhost:3306/database&quot;
-  - name: &quot;table_bar&quot;
-    uri: &quot;mysql://username:password@localhost:3306/database&quot;
-  - name: &quot;table_baz&quot;
-    uri: &quot;sqlite://path/to/sqlitelite/file&quot;
+  - name: "table_foo"
+    uri: "mysql://username:password@localhost:3306/database"
+  - name: "table_bar"
+    uri: "mysql://username:password@localhost:3306/database"
+  - name: "table_baz"
+    uri: "sqlite://path/to/sqlitelite/file"
 </code></pre>
 <p>With this, you can now write a single SQL query to join tables between MySQL, SQLite and local CSV files!</p>
-<footer id="open-on-gh">Found a bug? <a href="https://github.com/roapi/docs/edit/main/src/config/databases.md">Edit this file on GitHub.</a></footer><h1 id="postgres-wire-protocol"><a class="header" href="#postgres-wire-protocol">Postgres wire protocol</a></h1>
+<p>By default, ROAPI will use the provided table name as the table name to extract
+data from the database. If you want to expose a specific database table with a
+different name, you can use the <code>option</code> field to specify the original table
+name like below:</p>
+<pre><code class="language-yaml">tables:
+  - name: custom_table_name
+    uri: "sqlite://path/to/sqlitelite/file"
+    option:
+      table: original_table_name
+      format: sqlite
+</code></pre>
+<footer id="open-on-gh">Found a bug? <a href="https://github.com/roapi/docs/edit/main/src/config/databases.md">Edit this page on GitHub.</a></footer><div style="break-before: page; page-break-before: always;"></div><h1 id="postgres-wire-protocol"><a class="header" href="#postgres-wire-protocol">Postgres wire protocol</a></h1>
 <p>ROAPI uses the <a href="https://github.com/returnString/convergence">convergence</a> Rust
 crate to read and write Postgres wire protocol. This means you will be able to
 query all tables loaded in ROAPI using any Postgres Clients as if ROAPI is a
@@ -837,7 +844,7 @@ following to your config file:</p>
 psql (12.10 (Ubuntu 12.10-0ubuntu0.20.04.1), server 13)
 WARNING: psql major version 12, server major version 13.
          Some psql features might not work.
-Type &quot;help&quot; for help.
+Type "help" for help.
 
 houqp=&gt; select 1;
  Int64(1) 
@@ -848,19 +855,19 @@ houqp=&gt; select 1;
 houqp=&gt; 
 </code></pre>
 <p>See <a href="config/dataset-formats/gsheet.html#example">here</a> for an example on how you can query data stored in a Google spreadsheet using the <code>psql</code> Postgres client.</p>
-<footer id="open-on-gh">Found a bug? <a href="https://github.com/roapi/docs/edit/main/src/postgres.md">Edit this file on GitHub.</a></footer><h1 id="http-api"><a class="header" href="#http-api">HTTP API</a></h1>
-<footer id="open-on-gh">Found a bug? <a href="https://github.com/roapi/docs/edit/main/src/api/README.md">Edit this file on GitHub.</a></footer><h1 id="query-frontends"><a class="header" href="#query-frontends">Query frontends</a></h1>
+<footer id="open-on-gh">Found a bug? <a href="https://github.com/roapi/docs/edit/main/src/postgres.md">Edit this page on GitHub.</a></footer><div style="break-before: page; page-break-before: always;"></div><h1 id="http-api"><a class="header" href="#http-api">HTTP API</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="query-frontends"><a class="header" href="#query-frontends">Query frontends</a></h1>
 <p>ROAPI exposes a diverse set of interfaces through the HTTP protocol.</p>
-<footer id="open-on-gh">Found a bug? <a href="https://github.com/roapi/docs/edit/main/src/api/query/README.md">Edit this file on GitHub.</a></footer><h1 id="sql"><a class="header" href="#sql">SQL</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="sql"><a class="header" href="#sql">SQL</a></h1>
 <p>To query tables using a subset of standard SQL, send the query payload through
 <code>POST</code> request to <code>/api/sql</code> endpoint. This is the only query interface that
 supports table joins.</p>
 <p>SQL query frontend is the more flexible and powerful compared to
 <a href="api/query/rest.html">REST</a> and <a href="api/query/graphql.html">GraphQL</a>. It is the only query frontend
 that supports table joins.</p>
-<p>SQL frontend supports <code>[&quot;&quot;]</code> operator for accessing struct fields and array
-element. For example <code>struct_col[&quot;key1&quot;][&quot;key2&quot;]</code> or <code>array_col[0]</code>.</p>
-<footer id="open-on-gh">Found a bug? <a href="https://github.com/roapi/docs/edit/main/src/api/query/sql.md">Edit this file on GitHub.</a></footer><h1 id="rest"><a class="header" href="#rest">REST</a></h1>
+<p>SQL frontend supports <code>[""]</code> operator for accessing struct fields and array
+element. For example <code>struct_col["key1"]["key2"]</code> or <code>array_col[0]</code>.</p>
+<footer id="open-on-gh">Found a bug? <a href="https://github.com/roapi/docs/edit/main/src/api/query/sql.md">Edit this page on GitHub.</a></footer><div style="break-before: page; page-break-before: always;"></div><h1 id="rest"><a class="header" href="#rest">REST</a></h1>
 <p>Query tables through REST API by sending <code>GET</code> requests to
 <code>/api/tables/{table_name}</code>. Query operators are specified as query params.</p>
 <p>REST query frontend currently supports the following query operators:</p>
@@ -876,7 +883,7 @@ query param to: <code>sort=col1,-col2</code>.</p>
 <code>filter[col1]='foo'</code>. You can also do basic comparisons with filters, for
 example predicate <code>0 &lt;= col2 &lt; 5</code> can be expressed as
 <code>filter[col2]gte=0&amp;filter[col2]lt=5</code>.</p>
-<footer id="open-on-gh">Found a bug? <a href="https://github.com/roapi/docs/edit/main/src/api/query/rest.md">Edit this file on GitHub.</a></footer><h1 id="graphql"><a class="header" href="#graphql">GraphQL</a></h1>
+<footer id="open-on-gh">Found a bug? <a href="https://github.com/roapi/docs/edit/main/src/api/query/rest.md">Edit this page on GitHub.</a></footer><div style="break-before: page; page-break-before: always;"></div><h1 id="graphql"><a class="header" href="#graphql">GraphQL</a></h1>
 <p>To query tables through GraphQL, send the query through <code>POST</code> request to
 <code>/api/graphql</code> endpoint.</p>
 <p>GraphQL query frontend supports the same set of operators supported by <a href="api/query/rest.html">REST
@@ -888,8 +895,8 @@ query frontend</a>. Here how is you can apply various operators in a query:</p>
             col2: { gteq: 4, lt: 1000 }
         }
         sort: [
-            { field: &quot;col2&quot;, order: &quot;desc&quot; }
-            { field: &quot;col3&quot; }
+            { field: "col2", order: "desc" }
+            { field: "col3" }
         ]
         limit: 100
     ) {
@@ -899,7 +906,7 @@ query frontend</a>. Here how is you can apply various operators in a query:</p>
     }
 }
 </code></pre>
-<footer id="open-on-gh">Found a bug? <a href="https://github.com/roapi/docs/edit/main/src/api/query/graphql.md">Edit this file on GitHub.</a></footer><h1 id="key-value-lookup"><a class="header" href="#key-value-lookup">Key value lookup</a></h1>
+<footer id="open-on-gh">Found a bug? <a href="https://github.com/roapi/docs/edit/main/src/api/query/graphql.md">Edit this page on GitHub.</a></footer><div style="break-before: page; page-break-before: always;"></div><h1 id="key-value-lookup"><a class="header" href="#key-value-lookup">Key value lookup</a></h1>
 <p>Query key value stores through REST API by sending <code>GET</code> requests to
 <code>/api/kv/{kv_name}/{key}</code>.</p>
 <p>For example, the kvstore defined in <a href="api/query//config/config-file.html#key-value-stores">the sample
@@ -907,19 +914,19 @@ config</a> can be queried like below:</p>
 <pre><code class="language-bash">$ curl -v localhost:8080/api/kv/spacex_launch_name/600f9a8d8f798e2a4d5f979e
 Starlink-21 (v1.0)%
 </code></pre>
-<footer id="open-on-gh">Found a bug? <a href="https://github.com/roapi/docs/edit/main/src/api/query/kv.md">Edit this file on GitHub.</a></footer><h1 id="schema"><a class="header" href="#schema">Schema</a></h1>
+<footer id="open-on-gh">Found a bug? <a href="https://github.com/roapi/docs/edit/main/src/api/query/kv.md">Edit this page on GitHub.</a></footer><div style="break-before: page; page-break-before: always;"></div><h1 id="schema"><a class="header" href="#schema">Schema</a></h1>
 <p>Get schemas for all tables:</p>
 <pre><code class="language-bash">curl localhost:8080/api/schema
 </code></pre>
 <p>Get schema for a specific table by name:</p>
 <pre><code class="language-bash">curl localhost:8080/api/schema/{TABLE_NAME}
 </code></pre>
-<footer id="open-on-gh">Found a bug? <a href="https://github.com/roapi/docs/edit/main/src/api/schema.md">Edit this file on GitHub.</a></footer><h1 id="response-serialization"><a class="header" href="#response-serialization">Response serialization</a></h1>
+<footer id="open-on-gh">Found a bug? <a href="https://github.com/roapi/docs/edit/main/src/api/schema.md">Edit this page on GitHub.</a></footer><div style="break-before: page; page-break-before: always;"></div><h1 id="response-serialization"><a class="header" href="#response-serialization">Response serialization</a></h1>
 <p>By default, ROAPI encodes responses in JSON format, but you can request
 different encodings by specifying the <code>ACCEPT</code> header:</p>
 <pre><code class="language-bash">curl -X POST \
     -H 'ACCEPT: application/vnd.apache.arrow.stream' \
-    -d &quot;SELECT launch_library_id FROM spacex_launches WHERE launch_library_id IS NOT NULL&quot; \
+    -d "SELECT launch_library_id FROM spacex_launches WHERE launch_library_id IS NOT NULL" \
     localhost:8080/api/sql
 </code></pre>
 <p>ROAPI currently supports the following serialization formats:</p>
@@ -930,14 +937,12 @@ different encodings by specifying the <code>ACCEPT</code> header:</p>
 <li><code>application/vnd.apache.arrow.stream</code></li>
 <li><code>application/parquet</code></li>
 </ul>
-<footer id="open-on-gh">Found a bug? <a href="https://github.com/roapi/docs/edit/main/src/api/response.md">Edit this file on GitHub.</a></footer>
+<footer id="open-on-gh">Found a bug? <a href="https://github.com/roapi/docs/edit/main/src/api/response.md">Edit this page on GitHub.</a></footer>
                     </main>
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
-                        
 
-                        
 
                         <div style="clear: both"></div>
                     </nav>
@@ -945,49 +950,35 @@ different encodings by specifying the <code>ACCEPT</code> header:</p>
             </div>
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
-                
 
-                
             </nav>
 
         </div>
 
-        
 
-        
 
-        
 
-        
-        <script type="text/javascript">
+        <script>
             window.playground_copyable = true;
         </script>
-        
 
-        
 
-        
-        <script src="elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
-        <script src="mark.min.js" type="text/javascript" charset="utf-8"></script>
-        <script src="searcher.js" type="text/javascript" charset="utf-8"></script>
-        
+        <script src="elasticlunr.min.js"></script>
+        <script src="mark.min.js"></script>
+        <script src="searcher.js"></script>
 
-        <script src="clipboard.min.js" type="text/javascript" charset="utf-8"></script>
-        <script src="highlight.js" type="text/javascript" charset="utf-8"></script>
-        <script src="book.js" type="text/javascript" charset="utf-8"></script>
+        <script src="clipboard.min.js"></script>
+        <script src="highlight.js"></script>
+        <script src="book.js"></script>
 
         <!-- Custom JS scripts -->
-        
 
-        
-        
-        <script type="text/javascript">
+        <script>
         window.addEventListener('load', function() {
             window.setTimeout(window.print, 100);
         });
         </script>
-        
-        
 
+    </div>
     </body>
 </html>
