@@ -69,14 +69,12 @@ tables:
         format: "csv"
 ```
 
-Note that AWS region needs to be manually specified through `AWS_REGION`
-environment variable.
+To configure S3 credentials, you can set the following environment variables:
 
-To configure S3 credentials, you can use IAM role or set the following
-environment variables if you are using IAM user:
-
-* `AWS_SECRET_ACCESS_KEY`
-* `AWS_ACCESS_KEY_ID`
+* `AWS_ENDPOINT_URL`: The endpoint URL for your S3 provider
+* `AWS_REGION`: The region where your S3 bucket is located
+* `AWS_SECRET_ACCESS_KEY`: The secret access key from your S3 provider
+* `AWS_ACCESS_KEY_ID`: The access key ID from your S3 provider
 
 ## GCS
 
