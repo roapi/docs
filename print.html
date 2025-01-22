@@ -747,13 +747,12 @@ similar to filesystem store:</p>
     option:
         format: "csv"
 </code></pre>
-<p>Note that AWS region needs to be manually specified through <code>AWS_REGION</code>
-environment variable.</p>
-<p>To configure S3 credentials, you can use IAM role or set the following
-environment variables if you are using IAM user:</p>
+<p>To configure S3 credentials, you can set the following environment variables:</p>
 <ul>
-<li><code>AWS_SECRET_ACCESS_KEY</code></li>
-<li><code>AWS_ACCESS_KEY_ID</code></li>
+<li><code>AWS_ENDPOINT_URL</code>: The endpoint URL for your S3 provider</li>
+<li><code>AWS_REGION</code>: The region where your S3 bucket is located</li>
+<li><code>AWS_SECRET_ACCESS_KEY</code>: The secret access key from your S3 provider</li>
+<li><code>AWS_ACCESS_KEY_ID</code>: The access key ID from your S3 provider</li>
 </ul>
 <h2 id="gcs"><a class="header" href="#gcs">GCS</a></h2>
 <p>ROAPI can build tables from datasets hosted in GCS buckets. Configuration is
