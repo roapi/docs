@@ -8,7 +8,7 @@ advanced format specific table options. For example:
 ```yaml
 addr:
   # binding address for TCP port that speaks HTTP protocol
-  http: 0.0.0.0:8084
+  http: 0.0.0.0:8080
   # binding address for TCP port that speaks Postgres wire protocol
   postgres: 0.0.0.0:5432
 tables:
