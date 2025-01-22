@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>Xlsx - ROAPI Documentation</title>
+        <title>MS Excel compatible formats - ROAPI Documentation</title>
 
 
         <!-- Custom HTML head -->
@@ -168,20 +168,97 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1 id="xlsxmicrosoft-excel"><a class="header" href="#xlsxmicrosoft-excel">Xlsx(Microsoft Excel)</a></h1>
-<p>To load the <code>.xlsx</code>, <code>sheet_name</code> needs to be specified in a config.</p>
-<p>By default, most <code>.xlsx</code> files initially use Sheet1 as the <code>sheet_name</code>. Be sure to change this sheet_name as needed if your spreadsheet uses a different sheet_name.</p>
-<p>Ex) Sheet1</p>
-<p><img src="../../images/xlsx_sheet_name.png" alt="xlsx_sheet_name" /></p>
+                        <h1 id="ms-excel-compatible-formats"><a class="header" href="#ms-excel-compatible-formats">MS Excel compatible formats.</a></h1>
+<p>ROAPI supports loading a few Microsoft Excel compatible formats like xls, xlsx, xlsb, ods.</p>
+<h2 id="configuration"><a class="header" href="#configuration">Configuration</a></h2>
+<p>To load MS Excel compatible files the config should be specified like:</p>
+<pre><code class="language-yaml">tables:
+    - name: "&lt;table name&gt;"
+      uri: "&lt;files path&gt;"
+      option:
+        format: "&lt;file format&gt;"
+        sheet_name: "Sheet1"
+        rows_range_start: 2
+        rows_range_end: 5
+        columns_range_start: 1
+        columns_range_end: 6
+        schema_inference_lines: 3
+</code></pre>
+<ul>
+<li><strong>format</strong> - name of file format. Currently supported files format:
+<ul>
+<li>xls (Microsoft Excel 5.0/95 Workbook)</li>
+<li>xlsx (Excel Workbook)</li>
+<li>xlsb (Excel Binary Workbook)</li>
+<li>ods (OpenDocument Spreadsheet)</li>
+</ul>
+</li>
+<li><strong>sheet_name</strong> - the name of the spread sheet with table data. By default, most files initially use Sheet1 as the <code>sheet_name</code>. Be sure to change this <code>sheet_name</code> as needed if your spreadsheet uses a different name.
+<img src="../../images/xlsx_sheet_name.png" alt="xlsx_sheet_name" />
+If no <code>sheet_name</code> is specified, ROAPI will use first spreadsheet.</li>
+<li><strong>Table range options</strong>
+<ul>
+<li><strong>rows_range_start</strong> - the first row of the table. It contains column names. By default, <code>rows_range_start</code> is 0 (the first raw in spreadsheet)</li>
+<li><strong>rows_range_end</strong> - the last row of the table. By default, ROAPI reads all data.</li>
+<li><strong>columns_range_start</strong> - the column of the table. By default, <code>columns_range_start</code> is 0 (first column in spreadsheet)</li>
+<li><strong>columns_range_end</strong> - the last column of the table. By default, ROAPI reads all columns.<br />
+For example, to take only selected data:
+<img src="../../images/spread_sheet_range.png" alt="spread_sheet_range" />
+the config file looks like:</li>
+</ul>
+</li>
+</ul>
+<pre><code class="language-yaml">tables:
+    - name: "&lt;table name&gt;"
+      uri: "&lt;files path&gt;"
+      option:
+        format: "&lt;file format&gt;"
+        sheet_name: "Sheet1"
+        rows_range_start: 1
+        rows_range_end: 4
+        columns_range_start: 1
+        columns_range_end: 3
+</code></pre>
+<ul>
+<li><strong>schema_inference_lines</strong> - the number of rows (inside table range) to use in schema inference. This number includes the row with column names, so, for example, <code>schema_inference_lines: 3</code> means ROAPI will use first row for column names inference and 2 rows for column types inference. If this option is not specified then ROAPI reads all rows for column data types inference.</li>
+</ul>
+<h2 id="schema-inference"><a class="header" href="#schema-inference">Schema inference.</a></h2>
+<p>ROAPI can infer schema of data automatically. The first row of data range is a row with column names. After column names inference ROAPI will infer data types by scanning all remaining rows or limited number of rows specified in <code>schema_inference_lines</code> option.
+If column contains more than one data type (for exaple, float and int) then ROAPI use Utf8 datatype.</p>
+<p>Also, it is possible to specify schema in configuration file. This allows to avoid schema inference from data and loading of table will be faster.</p>
 <pre><code class="language-yaml">tables:
     - name: "excel_table"
       uri: "path/to/file.xlsx"
       option:
         format: "xlsx"
-        sheet_name: "Sheet1"
+      schema:
+        columns:
+        - name: "int_column"
+          data_type: "Int64"
+          nullable: true
+        - name: "string_column"
+          data_type: "Utf8"
+          nullable: true
+        - name: "float_column"
+          data_type: "Float64"
+          nullable: true
+        - name: "datetime_column"
+          data_type: !Timestamp [Seconds, null]
+          nullable: true
+        - name: "duration_column"
+          data_type: !Duration Second
+          nullable: true
+        - name: "date32_column"
+          data_type: Date32
+          nullable: true
+        - name: "date64_column"
+          data_type: Date64
+          nullable: true
+        - name: "null_column"
+          data_type: Null
+          nullable: true
 </code></pre>
-<p>If no <code>sheet_name</code> is specified, ROAPI will throw the error.</p>
-<footer id="open-on-gh">Found a bug? <a href="https://github.com/roapi/docs/edit/main/src/config/dataset-formats/xlsx.md">Edit this page on GitHub.</a></footer>
+<footer id="open-on-gh">Found a bug? <a href="https://github.com/roapi/docs/edit/main/src/config/dataset-formats/excel.md">Edit this page on GitHub.</a></footer>
                     </main>
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
