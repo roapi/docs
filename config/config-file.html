@@ -231,7 +231,9 @@ columns to be used to load keys and values in the config:</p>
   "execution.batch_size": "8192"
   "sql_parser.enable_ident_normalization": "true"
 </code></pre>
-<p>The <code>datafusion</code> field accepts a map of configuration key-value pairs where both keys and values are strings. You can reference the <a href="https://docs.rs/datafusion/latest/datafusion/config/struct.ConfigOptions.html">DataFusion configuration documentation</a> for a complete list of available configuration options.</p>
+<p>The <code>datafusion</code> field accepts a map of configuration key-value pairs where
+both keys and values are strings. You can reference the <a href="https://datafusion.apache.org/user-guide/configs.html">DataFusion configuration documentation</a>
+for a complete list of available configuration options.</p>
 <h2 id="specify-a-config-file-on-startup"><a class="header" href="#specify-a-config-file-on-startup">Specify a config file on startup</a></h2>
 <p>Use <code>-c</code> argument to run ROAPI using a specific config file:</p>
 <pre><code class="language-bash">roapi -c ./roapi.yml
