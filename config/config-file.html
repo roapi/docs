@@ -224,6 +224,14 @@ columns to be used to load keys and values in the config:</p>
     value: name
 </code></pre>
 <p>The above config will create a keyvalue store named <code>spacex_launch_name</code> that allows you to lookup SpaceX launch names using launch ids.</p>
+<h2 id="datafusion-configuration"><a class="header" href="#datafusion-configuration">DataFusion configuration</a></h2>
+<p>You can override DataFusion configuration settings by specifying them in the <code>datafusion</code> section of your config file. This allows you to tune the query engine's behavior for your specific use case:</p>
+<pre><code class="language-yaml">datafusion:
+  "execution.collect_statistics": "true"
+  "execution.batch_size": "8192"
+  "sql_parser.enable_ident_normalization": "true"
+</code></pre>
+<p>The <code>datafusion</code> field accepts a map of configuration key-value pairs where both keys and values are strings. You can reference the <a href="https://docs.rs/datafusion/latest/datafusion/config/struct.ConfigOptions.html">DataFusion configuration documentation</a> for a complete list of available configuration options.</p>
 <h2 id="specify-a-config-file-on-startup"><a class="header" href="#specify-a-config-file-on-startup">Specify a config file on startup</a></h2>
 <p>Use <code>-c</code> argument to run ROAPI using a specific config file:</p>
 <pre><code class="language-bash">roapi -c ./roapi.yml
