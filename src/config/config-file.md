@@ -64,6 +64,18 @@ kvstores:
 
 The above config will create a keyvalue store named `spacex_launch_name` that allows you to lookup SpaceX launch names using launch ids.
 
+## DataFusion configuration
+
+You can override DataFusion configuration settings by specifying them in the `datafusion` section of your config file. This allows you to tune the query engine's behavior for your specific use case:
+
+```yaml
+datafusion:
+  "execution.collect_statistics": "true"
+  "execution.batch_size": "8192"
+  "sql_parser.enable_ident_normalization": "true"
+```
+
+The `datafusion` field accepts a map of configuration key-value pairs where both keys and values are strings. You can reference the [DataFusion configuration documentation](https://docs.rs/datafusion/latest/datafusion/config/struct.ConfigOptions.html) for a complete list of available configuration options.
 
 ## Specify a config file on startup
 
