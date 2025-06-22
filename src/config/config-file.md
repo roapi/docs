@@ -75,7 +75,9 @@ datafusion:
   "sql_parser.enable_ident_normalization": "true"
 ```
 
-The `datafusion` field accepts a map of configuration key-value pairs where both keys and values are strings. You can reference the [DataFusion configuration documentation](https://docs.rs/datafusion/latest/datafusion/config/struct.ConfigOptions.html) for a complete list of available configuration options.
+The `datafusion` field accepts a map of configuration key-value pairs where
+both keys and values are strings. You can reference the [DataFusion configuration documentation](https://datafusion.apache.org/user-guide/configs.html)
+for a complete list of available configuration options.
 
 ## Specify a config file on startup
 
